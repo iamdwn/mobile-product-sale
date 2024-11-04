@@ -21,7 +21,7 @@
             android:name=".OrderConfirmationActivity"
             android:exported="false" />
         <activity
-            android:name=".PaymentMethodSelectionActivity"
+            android:name=".PaymentSuccessActivity"
             android:exported="false" />
         <activity
             android:name=".VietQRPaymentActivity"
