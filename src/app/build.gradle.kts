@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
+    implementation(libs.support.annotations)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -75,5 +76,6 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.13.2")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.picasso:picasso:2.71828")
 
 }
