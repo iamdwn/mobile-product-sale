@@ -1,5 +1,6 @@
 package com.mobile.productsale;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -35,7 +36,7 @@ public class VietQRPaymentActivity extends AppCompatActivity {
         completePaymentButton = findViewById(R.id.completePaymentButton);
 
         paymentService = new PaymentService();
-        paymentId = getIntent().getIntExtra("PAYMENT_ID", 2);
+        paymentId = getIntent().getIntExtra("PAYMENT_ID", -1);
 
         if (paymentId != -1) {
             fetchVietQR(paymentId);
@@ -47,7 +48,11 @@ public class VietQRPaymentActivity extends AppCompatActivity {
 
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(view -> finish());
-        completePaymentButton.setOnClickListener(view -> completePayment(paymentId));
+        completePaymentButton.setOnClickListener(view -> {
+            completePayment(paymentId);
+            Intent intent = new Intent(VietQRPaymentActivity.this, PaymentSuccessActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void startPaymentStatusPolling() {
