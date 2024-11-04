@@ -1,4 +1,4 @@
-package com.mobile.productsale;
+package com.mobile.productsale.Util;
 
 import android.content.Context;
 import android.widget.ImageView;

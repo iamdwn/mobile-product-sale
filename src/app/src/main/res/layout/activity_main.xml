@@ -41,12 +41,12 @@
     <EditText
         android:id="@+id/usernameText"
         android:layout_width="319dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="396dp"
+        android:autofillHints="username"
         android:ems="10"
         android:inputType="text"
-        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,11 +63,11 @@
     <EditText
         android:id="@+id/passwordText"
         android:layout_width="319dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="480dp"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -113,7 +113,7 @@
     <Button
         android:id="@+id/loginBtn"
         android:layout_width="196dp"
-        android:layout_height="44dp"
+        android:layout_height="48dp"
         android:layout_marginStart="108dp"
         android:layout_marginTop="580dp"
         android:text="Login"
