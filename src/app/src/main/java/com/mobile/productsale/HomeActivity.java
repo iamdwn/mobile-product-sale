@@ -7,7 +7,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Home extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -18,8 +18,7 @@ public class Home extends AppCompatActivity {
         TextView logout = findViewById(R.id.logout);
 
         logout.setOnClickListener(v -> {
-
-            Intent backToLogin = new Intent(Home.this, MainActivity.class);
+            Intent backToLogin = new Intent(HomeActivity.this, MainActivity.class);
             startActivity(backToLogin);
         });
     }
