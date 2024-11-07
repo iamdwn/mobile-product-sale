@@ -55,16 +55,16 @@
         app:layout_constraintTop_toBottomOf="@id/header">
 
         <!-- Nút Sort -->
+
+        <!-- Nút Filter -->
         <Button
             android:id="@+id/sortButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_border"
-            android:backgroundTint="#FFFFFF"
             android:text="@string/sort"
-            android:textColor="#000000" />
+            android:textColor="@color/white" />
 
-        <!-- Nút Filter -->
         <Button
             android:id="@+id/filterButton"
             android:layout_width="wrap_content"
@@ -72,9 +72,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/button_border"
-            android:backgroundTint="#FFFFFF"
             android:text="@string/filter"
-            android:textColor="#000000" />
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <!-- RecyclerView chứa danh sách các card -->
