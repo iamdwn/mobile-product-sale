@@ -10,17 +10,18 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface RequestUser {
     @POST("/api/Account/registration")
     Call<BodyResponse> registration(@Body RegisterDTO registerDTO);
 
     @POST("api/Account/authen")
-    Call<BodyResponse> login(@Body LoginDTO loginDTO);
+    Call<BodyResponse> login(@Query("username") String username,
+                             @Query("password") String password);
 
-    @FormUrlEncoded
     @GET("/api/Account/user")
-    Call<BodyResponse> getUser(@Field("type") int type,
-                               @Field("content") String content);
+    Call<BodyResponse> getUser(@Query("type") int type,
+                               @Query("content") String content);
 
 }

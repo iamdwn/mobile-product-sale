@@ -21,6 +21,9 @@
             android:label="@string/title_activity_register"
             android:theme="@style/Theme.ProductSale" />
         <activity
+            android:name=".HomeActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>
