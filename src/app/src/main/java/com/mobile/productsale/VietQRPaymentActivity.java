@@ -110,7 +110,7 @@ public class VietQRPaymentActivity extends AppCompatActivity {
             public void onResponse(Call<VietQrResponse> call, Response<VietQrResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     String qrUrl = response.body().getQrUrl();
-//                    Picasso.get().load(qrUrl).into(qrImageView);
+                    Picasso.get().load(qrUrl).into(qrImageView);
 //                    WebView qrWebView = findViewById(R.id.qrWebView);
 //                    qrWebView.getSettings().setJavaScriptEnabled(true);
 //                    qrWebView.loadUrl(qrUrl);
