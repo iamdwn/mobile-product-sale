@@ -25,7 +25,7 @@ public class RetryInterceptor implements Interceptor {
                 successful = response.isSuccessful();
             } catch (IOException e) {
                 if (retryCount >= maxRetries) {
-                    throw e; // Throw exception if retries exceeded
+                    throw e;
                 }
             }
             retryCount++;
