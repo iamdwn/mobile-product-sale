@@ -2,11 +2,30 @@
     <string name="app_name">ProductSale</string>
     <string name="username">Username</string>
     <string name="password">password</string>
+    <string name="home">Home</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <!-- Filter  -->
+    <string name="filter">Filter</string>
+    <string name="brand">Brand</string>
+    <string name="price_range">Price Range</string>
+    <string name="ratings">Ratings</string>
+    <!-- Sort  -->
+    <string name="sort">Sort</string>
+    <string name="price">Price</string>
+    <string name="popularity">Popularity</string>
+    <string name="category">Category</string>
+
+    <string name="product_name">Product Name</string>
+    <string name="product_price">Product Price</string>
+    <string name="product_description">Brief description of the product.</string>
+
+    <!-- Icon  -->
+    <string name="notification_icon">Notification Icon</string>
+
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

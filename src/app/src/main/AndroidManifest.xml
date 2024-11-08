@@ -35,7 +35,10 @@
             android:name=".PaymentSuccessActivity"
             android:exported="false" />
         <activity
-            android:name=".VietQRPaymentActivity"
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

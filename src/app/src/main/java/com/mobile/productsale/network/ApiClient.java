@@ -5,6 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static final String BASE_URL = "https://product-sale.iamdwn.dev/";
+//    private static final String BASE_URL = "http://localhost:5087/";
     private static Retrofit retrofit;
 
     public static Retrofit getRetrofitInstance() {
