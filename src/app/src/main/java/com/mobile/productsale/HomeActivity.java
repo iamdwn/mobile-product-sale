@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -13,8 +17,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import com.mobile.productsale.model.Account;
 import com.mobile.productsale.model.ProductDTO;
 
 public class HomeActivity extends AppCompatActivity {
@@ -33,6 +40,30 @@ public class HomeActivity extends AppCompatActivity {
 
         Button sortButton = findViewById(R.id.sortButton);
         Button filterButton = findViewById(R.id.filterButton);
+
+        ImageView logout = findViewById(R.id.logoutIcon);
+        ImageView noti = findViewById(R.id.notificationIcon);
+
+        Account accountInfo = getIntent().getParcelableExtra("accountInfo");
+
+        logout.setOnClickListener(v -> {
+            Intent backToLogin = new Intent(HomeActivity.this, MainActivity.class);
+
+            if (getIntent().hasExtra("accountInfo")) {
+                getIntent().removeExtra("accountInfo");
+            }
+            startActivity(backToLogin);
+        });
+
+        noti.setOnClickListener(v -> {
+            try {
+                Intent intent = new Intent(HomeActivity.this, NotiActivity.class);
+                intent.putExtra("accountInfo", accountInfo);
+                startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(HomeActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
 
         sortButton.setOnClickListener(view -> showPopup(R.layout.sort, sortButton));
         filterButton.setOnClickListener(view -> showPopup(R.layout.filter, filterButton));

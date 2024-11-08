@@ -8,6 +8,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -24,6 +25,6 @@ public interface RequestNoti {
     Call<BodyResponse> readNoti(@Query("notiId") int notiId);
 
     //remove
-    @POST("api/Notification/remove")
-    Call<BodyResponse> removeNoti(@Body List<Integer> noti);
+    @DELETE("api/Notification/remove")
+    Call<BodyResponse> removeNoti(@Query("notiId") int notiId);
 }

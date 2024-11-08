@@ -1,7 +1,9 @@
 package com.mobile.productsale;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,8 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.mobile.productsale.Util.ApiConfig;
+import com.mobile.productsale.Util.FormatJson;
 import com.mobile.productsale.api.RequestNoti;
 import com.mobile.productsale.api.RequestUser;
 import com.mobile.productsale.model.Account;
@@ -32,7 +36,7 @@ public class NotiActivity extends AppCompatActivity {
     private NotiAdapter notiAdapter;
     private List<Notification> listNoti;
     private Account accountInfo;
-    private Gson gson = new Gson();
+    private Gson gson;
     RequestNoti reqNoti = ApiConfig.getRetrofit().create(RequestNoti.class);
 
     @Override
@@ -42,30 +46,28 @@ public class NotiActivity extends AppCompatActivity {
 
         setContentView(R.layout.noti);
 
-        String json = "{\"notificationId\": 3, \"userId\": 9, \"message\": \"abc\", \"isRead\": false, \"createdAt\": \"2024-11-07T17:06:16.76\"}";
-        try {
-            Notification noti = gson.fromJson(json, Notification.class);
-            listNoti = new ArrayList<>();
-            listNoti.add(noti);
-        } catch (Exception e) {
-            Log.e("Loi chi mang",e.getMessage());
-            Toast.makeText(NotiActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
+        ImageView backToHome = findViewById(R.id.backToHome);
 
         notiView = findViewById(R.id.notiList);
         notiView.setLayoutManager(new LinearLayoutManager(this));
 
         accountInfo = getIntent().getParcelableExtra("accountInfo");
 
-//        reqNoti.getNotifications(accountInfo.getUserId()).enqueue(new Callback<BodyResponse>() {
-        reqNoti.getNotifications(9).enqueue(new Callback<BodyResponse>() {
+        reqNoti.getNotifications(accountInfo.getUserId()).enqueue(new Callback<BodyResponse>() {
             @Override
             public void onResponse(Call<BodyResponse> call, Response<BodyResponse> response) {
                 if (response.body() != null) {
                     if (response.body().getStatusCode() == 200 && response.body().getContent() != null) {
-                        String notificationJson = response.body().getContent().toString();
-                        listNoti.add(gson.fromJson(notificationJson, new TypeToken<List<Notification>>() {
-                        }.getType()));
+                        gson = new GsonBuilder().setLenient().create();
+                        String notificationJson = FormatJson.NotificationFormatter(response.body().getContent().toString());
+                        Log.e("Data retrieved", "Json: " + notificationJson);
+                        listNoti = new ArrayList<>();
+                        listNoti = gson.fromJson(notificationJson, new TypeToken<List<Notification>>() {
+                        }.getType());
+
+                        notiAdapter = new NotiAdapter(listNoti, NotiActivity.this);
+                        notiView.setAdapter(notiAdapter);
+
                     }
 
 
@@ -81,8 +83,11 @@ public class NotiActivity extends AppCompatActivity {
             }
         });
 
-        notiAdapter = new NotiAdapter(listNoti, this);
-        notiView.setAdapter(notiAdapter);
+        backToHome.setOnClickListener(v -> {
+            Intent intent = new Intent(this, HomeActivity.class);
+            intent.putExtra("accountInfo", accountInfo);
+            startActivity(intent);
+        });
 
     }
 
