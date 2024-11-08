@@ -7,21 +7,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.bumptech.glide.Glide; // Đảm bảo bạn đã thêm thư viện Glide vào dependencies
+import com.bumptech.glide.Glide;
+import com.mobile.productsale.model.ProductDTO;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-    private List<Product> productList;
+    private List<ProductDTO> productList;
     private OnItemClickListener onItemClickListener;
 
     // Interface để xử lý sự kiện click vào item
     public interface OnItemClickListener {
-        void onItemClick(Product product);
+        void onItemClick(ProductDTO product);
     }
 
     // Constructor nhận vào danh sách sản phẩm và listener cho sự kiện click
-    public ProductAdapter(List<Product> productList, OnItemClickListener onItemClickListener) {
+    public ProductAdapter(List<ProductDTO> productList, OnItemClickListener onItemClickListener) {
         this.productList = productList;
         this.onItemClickListener = onItemClickListener;
     }
@@ -38,7 +39,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         // Lấy sản phẩm hiện tại
-        Product product = productList.get(position);
+        ProductDTO product = productList.get(position);
 
         // Đặt dữ liệu lên các view trong ViewHolder
         holder.itemName.setText(product.getProductName());

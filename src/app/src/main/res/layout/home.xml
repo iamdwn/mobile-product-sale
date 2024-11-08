@@ -21,17 +21,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:layout_width="570dp"
-        android:layout_height="1010dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="72dp">
+<!--    <ScrollView-->
+<!--        android:layout_width="570dp"-->
+<!--        android:layout_height="1010dp"-->
+<!--        tools:layout_editor_absoluteX="1dp"-->
+<!--        tools:layout_editor_absoluteY="72dp">-->
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content" />
-    </ScrollView>
+<!--        <View-->
+<!--            android:id="@+id/view"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="wrap_content" />-->
+<!--    </ScrollView>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
