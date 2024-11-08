@@ -26,6 +26,7 @@
 
     <!-- Icon  -->
     <string name="notification_icon">Notification Icon</string>
+    <string name="logout_icon">Logout Icon</string>
     <string name="cart_icon">Cart Icon</string>
     <string name="chat_icon">Chat Icon</string>
 

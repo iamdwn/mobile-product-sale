@@ -10,14 +10,14 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface RequestUser {
-    @POST("/api/Account/registration")
+    @POST("api/Account/registration")
     Call<BodyResponse> registration(@Body RegisterDTO registerDTO);
 
-    @POST("/api/Account/authen")
+    @POST("api/Account/authen")
     Call<BodyResponse> login(@Query("username") String username,
                              @Query("password") String password);
 
-    @GET("/api/Account/user")
+    @GET("api/Account/user")
     Call<BodyResponse> getUser(@Query("type") int type,
                                @Query("content") String content);
 

@@ -6,6 +6,8 @@
         android:name="com.google.android.geo.API_KEY"
         android:value="AlzaSyJ-TujuvlBIoq23w5Gf1hpMTTz6k5NsZxV"/>
 
+<!--    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />-->
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"

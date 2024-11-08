@@ -1,15 +1,21 @@
 package com.mobile.productsale;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -19,8 +25,11 @@ import com.mobile.productsale.api.RequestUser;
 import com.mobile.productsale.model.BodyResponse;
 import com.mobile.productsale.model.Notification;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,21 +54,58 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        if (notifications != null) {
-            Notification noti = notifications.get(position);
+        Notification noti = notifications.get(position);
 
-            RequestNoti requestNoti = ApiConfig.getRetrofit().create(RequestNoti.class);
+        LinearLayout notiItem = holder.itemView.findViewById(R.id.noti_item);
 
-            holder.textView.setText(noti.getMessage());
+        if (noti.isRead()) {
+            notiItem.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.gray_light)); // hoặc màu xậm của bạn
+        } else {
+            notiItem.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.white));
+        }
 
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            holder.date.setText(noti.getCreatedAt());
+        RequestNoti requestNoti = ApiConfig.getRetrofit().create(RequestNoti.class);
 
-            holder.itemView.setOnClickListener(v -> {
+        holder.textView.setText(noti.getMessage());
 
-                //Read noti
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+
+        Date createdDate = null;
+        try {
+            createdDate = formatter.parse(noti.getCreatedAt());
+        } catch (ParseException e) {
+            Log.e("Date Parsing Error", e.getMessage());
+        }
+
+        Date currentDate = new Date();
+
+        if (createdDate != null) {
+            long diffInMillis = currentDate.getTime() - createdDate.getTime();
+            long minutes = TimeUnit.MILLISECONDS.toMinutes(diffInMillis);
+            long hours = TimeUnit.MILLISECONDS.toHours(diffInMillis);
+            long days = TimeUnit.MILLISECONDS.toDays(diffInMillis);
+
+            String elapsedTime;
+            if (days > 0) {
+                elapsedTime = days + " days";
+            } else if (hours > 0) {
+                elapsedTime = hours + " hours";
+            } else if (minutes > 0) {
+                elapsedTime = minutes + " mins";
+            } else {
+                elapsedTime = "recently";
+            }
+
+            holder.date.setText(elapsedTime);
+        } else {
+            holder.date.setText("Unknown date");
+        }
+
+        holder.itemView.setOnClickListener(v -> {
+            //Read noti
+            if (!noti.isRead()){
                 requestNoti.readNoti(noti.getNotificationId()).enqueue(new Callback<BodyResponse>() {
                     @Override
                     public void onResponse(@NonNull Call<BodyResponse> call, @NonNull Response<BodyResponse> response) {
@@ -68,6 +114,8 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
                         } else {
                             Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_LONG).show();
                         }
+                        noti.setRead(true);
+                        notifyDataSetChanged();
                     }
 
                     @Override
@@ -75,26 +123,30 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
                         Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
-            });
+            }
+        });
 
-            holder.button.setOnClickListener(v -> {
-                requestNoti.removeNoti(List.of(noti.getNotificationId())).enqueue(new Callback<BodyResponse>() {
-                    @Override
-                    public void onResponse(@NonNull Call<BodyResponse> call, @NonNull Response<BodyResponse> response) {
-                        if (response.body().getStatusCode() == 200) {
-                            Toast.makeText(context, "Noti deleted success", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_LONG).show();
-                        }
+        holder.button.setOnClickListener(v -> {
+            requestNoti.removeNoti(noti.getNotificationId()).enqueue(new Callback<BodyResponse>() {
+                @Override
+                public void onResponse(@NonNull Call<BodyResponse> call, @NonNull Response<BodyResponse> response) {
+                    if (response.body().getStatusCode() == 200) {
+                        Toast.makeText(context, "Noti deleted success", Toast.LENGTH_SHORT).show();
+                        notifications.remove(position); // Xóa item khỏi danh sách
+                        notifyItemRemoved(position);
+                    } else {
+                        Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_LONG).show();
                     }
+                }
 
-                    @Override
-                    public void onFailure(@NonNull Call<BodyResponse> call, @NonNull Throwable t) {
-                        Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                @Override
+                public void onFailure(@NonNull Call<BodyResponse> call, @NonNull Throwable t) {
+                    Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                }
             });
-        }
+        });
+
+
 //            Toast.makeText(context, "You have no notifications", Toast.LENGTH_LONG).show();
     }
 
@@ -108,6 +160,7 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
         private TextView textView;
         private Button button;
         private TextView date;
+        private ImageView backToHome;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -115,6 +168,7 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
             textView = itemView.findViewById(R.id.item_text);
             button = itemView.findViewById(R.id.close_icon);
             date = itemView.findViewById(R.id.item_date_time);
+            backToHome = itemView.findViewById(R.id.backToHome);
         }
     }
 

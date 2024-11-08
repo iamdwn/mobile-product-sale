@@ -1,6 +1,11 @@
 package com.mobile.productsale;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -93,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                                         requestUser.getUser(0, userName.getText().toString().trim())
                                                 .enqueue(new Callback<BodyResponse>() {
                                                     @Override
-                                                    public void onResponse(Call<BodyResponse> call,
+                                                    public void onResponse(@NonNull Call<BodyResponse> call,
                                                                            Response<BodyResponse> response) {
                                                         if (response.body() != null) {
                                                             if (response.body().getContent() != null) {
@@ -102,11 +107,24 @@ public class MainActivity extends AppCompatActivity {
 
                                                                 //Tạo thông báo nhập cập nhật thông tin
                                                                 if (accountInfo.getAddress().equals("default") || accountInfo.getPhoneNumber().equals("0352222222")) {
-                                                                    requestNoti.newNoti(new NewNotification(2, "[Information] Please update your personal information)"));
+                                                                    requestNoti.newNoti(new NewNotification(accountInfo.getUserId(), "[Information] Please update your personal information"));
                                                                     Log.i("Da goi api", "da goi api");
+
+//                                                                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.meohaha);
+//
+//                                                                    Notification noti = new Notification.Builder(MainActivity.this)
+//                                                                            .setContentTitle("[Information] update your information")
+//                                                                            .setContentText("Please update your personal information")
+//                                                                            .setLargeIcon(bitmap)
+//                                                                            .build();
+//
+//                                                                    NotificationManager notificationManager =
+//                                                                            (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+//                                                                    notificationManager.notify(1, noti);
+
                                                                 }
 
-                                                                Intent intent = new Intent(MainActivity.this, Home2Activity.class);
+                                                                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                                                                 intent.putExtra("accountInfo", accountInfo);
                                                                 startActivity(intent);
 

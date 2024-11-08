@@ -24,7 +24,7 @@ public class Home2Activity extends AppCompatActivity {
         setContentView(R.layout.home2);
 
         TextView logout = findViewById(R.id.logout);
-        TextView noti = findViewById(R.id.title);
+//        TextView noti = findViewById(R.id.title);
 
         accountInfo = getIntent().getParcelableExtra("accountInfo");
 
@@ -33,16 +33,16 @@ public class Home2Activity extends AppCompatActivity {
             startActivity(backToLogin);
         });
 
-        noti.setOnClickListener(v -> {
-            try {
-                Intent intent = new Intent(Home2Activity.this, NotiActivity.class);
-                intent.putExtra("accountInfo", accountInfo);
-                startActivity(intent);
-            } catch (Exception e) {
-                Toast.makeText(Home2Activity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-            }
-
-        });
+//        noti.setOnClickListener(v -> {
+//            try {
+//                Intent intent = new Intent(Home2Activity.this, NotiActivity.class);
+//                intent.putExtra("accountInfo", accountInfo);
+//                startActivity(intent);
+//            } catch (Exception e) {
+//                Toast.makeText(Home2Activity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//
+//        });
 
 
     }

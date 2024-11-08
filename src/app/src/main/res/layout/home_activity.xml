@@ -55,6 +55,14 @@
             android:contentDescription="@string/notification_icon"
             android:layout_marginEnd="8dp" />
 
+        <ImageView
+            android:id="@+id/logoutIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/right_from_bracket_solid"
+            android:contentDescription="@string/logout_icon"
+            android:layout_marginEnd="8dp" />
+
     </LinearLayout>
 
     <!-- Container cho Sort và Filter Buttons -->
