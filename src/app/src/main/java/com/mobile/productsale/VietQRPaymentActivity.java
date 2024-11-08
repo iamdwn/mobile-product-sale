@@ -71,10 +71,10 @@ public class VietQRPaymentActivity extends AppCompatActivity {
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(view -> finish());
         checkPaymentButton.setOnClickListener(view -> {
-            checkPayOSPaymentStatus(orderIdTest);
-//            completePayment(paymentId);
-//            Intent intent = new Intent(VietQRPaymentActivity.this, PaymentSuccessActivity.class);
-//            startActivity(intent);
+//            checkPayOSPaymentStatus(orderIdTest);
+            completePayment(paymentId);
+            Intent intent = new Intent(VietQRPaymentActivity.this, PaymentSuccessActivity.class);
+            startActivity(intent);
         });
     }
 
