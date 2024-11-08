@@ -28,7 +28,7 @@
             android:name=".ItemCartActivity"
             android:exported="false" />
         <activity
-            android:name=".CartActivity"
+            android:name=".OrderActivity"
             android:exported="false" />
 <!--        <activity-->
 <!--            android:name=".BillingDetailsActivity"-->
@@ -44,6 +44,12 @@
             android:exported="false" />
         <activity
             android:name=".ChatRoomActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".VietQRPaymentActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"

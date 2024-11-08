@@ -55,7 +55,7 @@ public class OrderActivity extends AppCompatActivity {
 
 
     }
-    Intent intent = new Intent(OrderActivity.this, PaymentActivity.class);
+    Intent intent = new Intent(OrderActivity.this, VietQRPaymentActivity.class);
 
 
     private void confirmOrder() {

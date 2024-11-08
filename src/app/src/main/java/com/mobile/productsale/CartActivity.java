@@ -1,6 +1,8 @@
 package com.mobile.productsale;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ public class CartActivity extends AppCompatActivity {
     private CartAdapter cartAdapter;
     private CartService cartService;
     private  int cartId;
+    private Button checkoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class CartActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewCartItems);
         textTotalAmount = findViewById(R.id.textTotalAmount);
+        checkoutButton = findViewById(R.id.buttonCheckout);
         cartService = new CartService();
 
         // Set up RecyclerView and Adapter
@@ -53,16 +57,25 @@ public class CartActivity extends AppCompatActivity {
 
         // Load cart items from the data source
         loadCartItems();
+
+        checkoutButton.setOnClickListener(view -> {
+            int orderId = 3;
+            Intent intent = new Intent(CartActivity.this, VietQRPaymentActivity.class);
+            intent.putExtra("orderId", orderId);
+            startActivity(intent);
+        });
     }
 
+    // Xử lý sự kiện khi nhấn nút "Back" trên Toolbar
     @Override
     public boolean onSupportNavigateUp() {
-        finish(); // Kết thúc Activity để quay lại HomeActivity
+        Intent intent = new Intent(CartActivity.this, HomeActivity.class); // Kết thúc Activity để quay lại HomeActivity
+        startActivity(intent);
         return true;
     }
 
     private void loadCartItems() {
-        cartService.getCartByUser(9, new Callback<CartDTO>() {
+        cartService.getCartByUser(1, new Callback<CartDTO>() {
             @Override
             public void onResponse(Call<CartDTO> call, Response<CartDTO> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -81,10 +94,12 @@ public class CartActivity extends AppCompatActivity {
                     }
 
                     // Notify the adapter of data changes
-                    cartAdapter.notifyDataSetChanged();
+                    cartAdapter.notifyDataSetChanged(); // This will update the RecyclerView
 
                     // Update the total amount with the newly loaded items
                     updateTotalAmount();
+                } else {
+                    Toast.makeText(CartActivity.this, "Không thể tải giỏ hàng", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -94,6 +109,7 @@ public class CartActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public void updateTotalAmount() {
         double totalAmount = 0;

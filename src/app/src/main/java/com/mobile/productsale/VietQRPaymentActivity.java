@@ -36,6 +36,7 @@ public class VietQRPaymentActivity extends AppCompatActivity {
     private PayOSPaymentRequestDTO payOSPaymentRequestDTO;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private static final int POLLING_INTERVAL = 3000;
+    private int orderId;
     private int orderIdTest = 3;
     private String paymentNote = "test oce chua?";
 
@@ -49,7 +50,8 @@ public class VietQRPaymentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vietqr_payment);
-        payOSPaymentRequestDTO = new PayOSPaymentRequestDTO(orderIdTest, paymentNote);
+        orderId = getIntent().getIntExtra("orderId", -1);
+        payOSPaymentRequestDTO = new PayOSPaymentRequestDTO(orderId, "Chuyen khoan cho" + orderId);
 
         qrImageView = findViewById(R.id.qrImageView);
 //        qrWebView = findViewById(R.id.qrWebView);
@@ -66,7 +68,7 @@ public class VietQRPaymentActivity extends AppCompatActivity {
 //            Toast.makeText(this, "Invalid Payment ID", Toast.LENGTH_SHORT).show();
 //            finish();
 //        }
-        getPaymentIdByOrderId(payOSPaymentRequestDTO.getOrderId());
+//        getPaymentIdByOrderId(payOSPaymentRequestDTO.getOrderId());
 
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(view -> finish());
@@ -180,10 +182,11 @@ public class VietQRPaymentActivity extends AppCompatActivity {
 //                    WebView qrWebView = findViewById(R.id.qrWebView);
 //                    qrWebView.getSettings().setJavaScriptEnabled(true);
 //                    qrWebView.loadUrl(qrUrl);
-                } else {
-                    String errorMessage = response.errorBody() != null ? response.errorBody().toString() : "Empty response";
-                    Toast.makeText(VietQRPaymentActivity.this, "Failed to load QR code: " + errorMessage, Toast.LENGTH_SHORT).show();
                 }
+//                else {
+//                    String errorMessage = response.errorBody() != null ? response.errorBody().toString() : "Empty response";
+//                    Toast.makeText(VietQRPaymentActivity.this, "Failed to load QR code: " + errorMessage, Toast.LENGTH_SHORT).show();
+//                }
             }
             @Override
             public void onFailure(Call<VietQrResponse> call, Throwable t) {
@@ -201,7 +204,7 @@ public class VietQRPaymentActivity extends AppCompatActivity {
                     Toast.makeText(VietQRPaymentActivity.this, "Payment completed successfully!", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    Toast.makeText(VietQRPaymentActivity.this, "Failed to complete payment", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(VietQRPaymentActivity.this, "Failed to complete payment", Toast.LENGTH_SHORT).show();
                 }
             }
 
