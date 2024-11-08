@@ -4,7 +4,7 @@ import com.mobile.productsale.api.RequestCart;
 import com.mobile.productsale.api.RequestPayment;
 import com.mobile.productsale.model.CartDTO;
 import com.mobile.productsale.model.Payment;
-import com.mobile.productsale.model.PaymentDTO;
+//import com.mobile.productsale.model.PaymentDTO;
 import com.mobile.productsale.model.ResponseMessageDTO;
 import com.mobile.productsale.model.VietQrResponse;
 import com.mobile.productsale.network.ApiClient;
