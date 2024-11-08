@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Home2Activity"
-    >
+    tools:context=".Home2Activity">
 
     <TextView
         android:id="@+id/logout"
@@ -20,19 +19,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <ScrollView-->
-<!--        android:layout_width="570dp"-->
-<!--        android:layout_height="1010dp"-->
-<!--        tools:layout_editor_absoluteX="1dp"-->
-<!--        tools:layout_editor_absoluteY="72dp">-->
-<!--        tools:layout_editor_absoluteY="72dp"-->
-<!--        tools:ignore="MissingConstraints">-->
+    <!--    <ScrollView-->
+    <!--        android:layout_width="570dp"-->
+    <!--        android:layout_height="1010dp"-->
+    <!--        tools:layout_editor_absoluteX="1dp"-->
+    <!--        tools:layout_editor_absoluteY="72dp">-->
+    <!--        tools:layout_editor_absoluteY="72dp"-->
+    <!--        tools:ignore="MissingConstraints">-->
 
-<!--        <View-->
-<!--            android:id="@+id/view"-->
-<!--            android:layout_width="100dp"-->
-<!--            android:layout_height="wrap_content" />-->
-<!--    </ScrollView>-->
+    <!--        <View-->
+    <!--            android:id="@+id/view"-->
+    <!--            android:layout_width="100dp"-->
+    <!--            android:layout_height="wrap_content" />-->
+    <!--    </ScrollView>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
