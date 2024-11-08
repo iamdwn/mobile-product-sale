@@ -15,16 +15,7 @@
         android:theme="@style/Theme.ProductSale"
         tools:targetApi="31">
         <activity
-            android:name=".FilterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SortActivity"
-            android:exported="false" />
-        <activity
             android:name=".ItemCardActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".BillingDetailsActivity"
@@ -36,7 +27,7 @@
             android:name=".PaymentSuccessActivity"
             android:exported="false" />
         <activity
-            android:name=".VietQRPaymentActivity"
+            android:name=".HomeActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
@@ -44,10 +35,10 @@
             android:label="@string/title_activity_register"
             android:theme="@style/Theme.ProductSale" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".VietQRPaymentActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

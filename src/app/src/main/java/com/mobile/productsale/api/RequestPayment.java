@@ -1,8 +1,6 @@
 package com.mobile.productsale.api;
 
-import com.mobile.productsale.model.CompletePaymentDTO;
-import com.mobile.productsale.model.Payment;
-import com.mobile.productsale.model.PaymentDTO;
+import com.mobile.productsale.model.PayOSPaymentRequestDTO;
 import com.mobile.productsale.model.PaymentStatusResponse;
 import com.mobile.productsale.model.VietQrResponse;
 
@@ -21,15 +19,20 @@ public interface RequestPayment {
     @GET("api/payment/get-status/{paymentId}")
     Call<PaymentStatusResponse> getPaymentStatus(@Path("paymentId") int paymentId);
 
-    @POST("api/payment")
-    Call<Payment> createPayment(@Body PaymentDTO paymentReq);
+    @POST("api/payment/payos")
+    Call<VietQrResponse> createPayOSPayment(@Body PayOSPaymentRequestDTO request);
+
+    @POST("api/payment/cancel")
+    Call<Object> cancelPayOSPayment(long orderCode, String reason);
 
     @PUT("api/payment")
-    Call<Void> updatePayment(@Body PaymentDTO paymentReq);
+    Call<Void> updatePayment(@Body PayOSPaymentRequestDTO paymentReq);
 
     @DELETE("api/payment/{paymentId}")
     Call<Void> removePayment(@Path("paymentId") int paymentId);
 
     @POST("api/payment/complete-payment/{paymentId}")
     Call<Void> completePayment(@Path("paymentId") int paymentId);
+
+
 }
