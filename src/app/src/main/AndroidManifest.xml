@@ -27,7 +27,11 @@
             android:name=".PaymentSuccessActivity"
             android:exported="false" />
         <activity
+<<<<<<< Updated upstream
             android:name=".HomeActivity"
+=======
+            android:name=".MainActivity"
+>>>>>>> Stashed changes
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
@@ -35,9 +39,12 @@
             android:label="@string/title_activity_register"
             android:theme="@style/Theme.ProductSale" />
         <activity
+<<<<<<< Updated upstream
             android:name=".MainActivity"
             android:exported="true" />
         <activity
+=======
+>>>>>>> Stashed changes
             android:name=".VietQRPaymentActivity"
             android:exported="true">
             <intent-filter>
