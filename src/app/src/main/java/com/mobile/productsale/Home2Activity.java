@@ -21,7 +21,7 @@ public class Home2Activity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.home);
+        setContentView(R.layout.home2);
 
         TextView logout = findViewById(R.id.logout);
         TextView noti = findViewById(R.id.title);

@@ -19,6 +19,7 @@ import com.mobile.productsale.api.RequestUser;
 import com.mobile.productsale.model.BodyResponse;
 import com.mobile.productsale.model.Notification;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import retrofit2.Call;
@@ -52,6 +53,8 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
             RequestNoti requestNoti = ApiConfig.getRetrofit().create(RequestNoti.class);
 
             holder.textView.setText(noti.getMessage());
+
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             holder.date.setText(noti.getCreatedAt());
 
             holder.itemView.setOnClickListener(v -> {

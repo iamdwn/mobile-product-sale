@@ -77,8 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
         loginBtn.setOnClickListener(v -> {
 
-            NewNotification no = new NewNotification(1, "");
-
             if (Validate.Field(userName, "Please enter a username") ||
                     Validate.Field(password, "Please enter a password")) {
 
