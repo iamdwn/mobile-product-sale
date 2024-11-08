@@ -132,7 +132,7 @@ public class HomeActivity extends AppCompatActivity {
         intent.putExtra("product_full_description", product.getFullDescription());
         intent.putExtra("product_specs", product.getTechnicalSpecifications());
         intent.putExtra("product_category", product.getCategory());
-        intent.putExtra("product_price", product.getPrice());
+        intent.putExtra("product_price", String.valueOf(product.getPrice()));
         intent.putExtra("product_image_url", product.getImageUrl());
         startActivity(intent);
     }

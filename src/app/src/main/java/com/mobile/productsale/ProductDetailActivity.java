@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
-    private TextView productName, productDescription, productTechnicalSpecifications, productCategory;
+    private TextView productName, productPrice, productFullDescription, productTechnicalSpecifications, productCategory;
     private ImageView productImage;
 
     @Override
@@ -27,21 +27,24 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         // Ánh xạ các view
         productName = findViewById(R.id.product_name);
-        productDescription = findViewById(R.id.product_description);
+        productPrice = findViewById(R.id.product_price);
+        productFullDescription = findViewById(R.id.product_full_description);
         productTechnicalSpecifications = findViewById(R.id.product_technical_specifications);
         productCategory = findViewById(R.id.product_category);
         productImage = findViewById(R.id.product_image);
 
         // Nhận dữ liệu từ Intent
         String name = getIntent().getStringExtra("product_name");
-        String description = getIntent().getStringExtra("product_description");
+        String price = getIntent().getStringExtra("product_price");
+        String fullDescription = getIntent().getStringExtra("product_full_description");
         String technicalSpecs = getIntent().getStringExtra("product_specs");
         String category = getIntent().getStringExtra("product_category");
         String imageUrl = getIntent().getStringExtra("product_image_url");
 
         // Cập nhật các view với dữ liệu
         if (name != null) productName.setText(name);
-        if (description != null) productDescription.setText(description);
+        if (price != null) productPrice.setText("Price: $" + price);
+        if (fullDescription != null) productFullDescription.setText(fullDescription);
         if (technicalSpecs != null) productTechnicalSpecifications.setText(technicalSpecs);
         if (category != null) productCategory.setText("Category: " + category);
 
