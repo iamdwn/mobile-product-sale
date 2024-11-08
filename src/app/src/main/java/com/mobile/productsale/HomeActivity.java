@@ -15,6 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
+import android.content.Intent;
+import android.widget.TextView;
+import androidx.annotation.Nullable;
+
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -73,6 +77,18 @@ public class HomeActivity extends AppCompatActivity {
 
         // Hiển thị PopupWindow ngay bên dưới nút được nhấn
         popupWindow.showAsDropDown(anchorView, 0, 10); // Điều chỉnh margin (x: 0, y: 10)
+
+//     protected void onCreate(@Nullable Bundle savedInstanceState) {
+//         super.onCreate(savedInstanceState);
+
+//         setContentView(R.layout.home);
+
+//         TextView logout = findViewById(R.id.logout);
+
+//         logout.setOnClickListener(v -> {
+//             Intent backToLogin = new Intent(HomeActivity.this, MainActivity.class);
+//             startActivity(backToLogin);
+//         });
     }
 
     // Phương thức mở ProductDetailActivity với thông tin của sản phẩm đã chọn

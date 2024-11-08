@@ -3,7 +3,7 @@ package com.mobile.productsale.model;
 import java.util.List;
 
 public class BodyResponse {
-    private String content;
+    private Object content;
     private String message;
     private List<String> details;
     private int statusCode;
@@ -12,7 +12,7 @@ public class BodyResponse {
     public BodyResponse() {
     }
 
-    public BodyResponse(String content, String message, List<String> details, int statusCode, Object meatadataDTO) {
+    public BodyResponse(Object content, String message, List<String> details, int statusCode, Object meatadataDTO) {
         this.content = content;
         this.message = message;
         this.details = details;
@@ -20,7 +20,7 @@ public class BodyResponse {
         this.meatadataDTO = meatadataDTO;
     }
 
-    public String getContent() {
+    public Object getContent() {
         return content;
     }
 

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -19,15 +20,10 @@ import com.mobile.productsale.Util.IconLoader;
 import com.mobile.productsale.Util.Validate;
 import com.mobile.productsale.api.RequestUser;
 import com.mobile.productsale.model.BodyResponse;
-import com.mobile.productsale.model.LoginDTO;
-
-import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Field;
-import retrofit2.http.POST;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,21 +65,25 @@ public class MainActivity extends AppCompatActivity {
         });
 
         loginBtn.setOnClickListener(v -> {
+
             if (Validate.Field(userName, "Please enter a username") ||
                     Validate.Field(password, "Please enter a password")) {
 
-                requestUser.login(new LoginDTO(userName.getText().toString().trim(), password.getText().toString().trim()))
+                requestUser.login(userName.getText().toString().trim(), password.getText().toString().trim())
                         .enqueue(new Callback<BodyResponse>() {
                             @Override
-                            public void onResponse(Call<BodyResponse> call, Response<BodyResponse> response) {
-                                Toast.makeText(MainActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                            public void onResponse(@NonNull Call<BodyResponse> call, @NonNull Response<BodyResponse> response) {
 
-//                                if (response.body().getStatusCode() == 200){
-//                                    //Login xong về trang home
-//                                    Intent intent = new Intent(MainActivity.this, Home.class);
-//                                    intent.putExtra("userName", userName.getText().toString());
-//                                    startActivity(intent);
-//                                }
+                                if (response.body()!=null){
+                                    Toast.makeText(MainActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+
+                                    if (response.body().getStatusCode() == 200){
+                                        //Login xong về trang home
+                                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+//                                        intent.putExtra("userName", userName.getText().toString());
+                                        startActivity(intent);
+                                    }
+                                }
 
                             }
 
@@ -98,4 +98,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    private void Login(){
+
+    }
+
 }
