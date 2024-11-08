@@ -55,6 +55,7 @@ public class CartActivity extends AppCompatActivity {
         loadCartItems();
     }
 
+    // Xử lý sự kiện khi nhấn nút "Back" trên Toolbar
     @Override
     public boolean onSupportNavigateUp() {
         finish(); // Kết thúc Activity để quay lại HomeActivity
@@ -62,7 +63,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void loadCartItems() {
-        cartService.getCartByUser(9, new Callback<CartDTO>() {
+        cartService.getCartByUser(1, new Callback<CartDTO>() {
             @Override
             public void onResponse(Call<CartDTO> call, Response<CartDTO> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -81,10 +82,12 @@ public class CartActivity extends AppCompatActivity {
                     }
 
                     // Notify the adapter of data changes
-                    cartAdapter.notifyDataSetChanged();
+                    cartAdapter.notifyDataSetChanged(); // This will update the RecyclerView
 
                     // Update the total amount with the newly loaded items
                     updateTotalAmount();
+                } else {
+                    Toast.makeText(CartActivity.this, "Không thể tải giỏ hàng", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -94,6 +97,7 @@ public class CartActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public void updateTotalAmount() {
         double totalAmount = 0;

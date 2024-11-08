@@ -127,6 +127,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void openProductDetail(ProductDTO product) {
         Intent intent = new Intent(HomeActivity.this, ProductDetailActivity.class);
+        intent.putExtra("product_id", product.getProductId());
         intent.putExtra("product_name", product.getProductName());
         intent.putExtra("product_brief_description", product.getBriefDescription());
         intent.putExtra("product_full_description", product.getFullDescription());

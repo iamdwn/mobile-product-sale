@@ -47,17 +47,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         holder.buttonIncrease.setOnClickListener(v -> {
             item.increaseQuantity();
-            notifyItemChanged(position);
+            notifyItemChanged(position); // Update the item in the RecyclerView
             cartActivity.updateTotalAmount();  // Update the total amount in the activity
 
-            // Call API to add item to cart
+            // Call API to update item quantity in cart
             cartService.addToCart(item.getProductId(), cartActivity.getCartId(), new Callback<ResponseMessageDTO>() {
                 @Override
                 public void onResponse(Call<ResponseMessageDTO> call, Response<ResponseMessageDTO> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         Toast.makeText(cartActivity, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(cartActivity, "Failed to add to cart", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(cartActivity, "Failed to update cart", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -71,10 +71,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.buttonDecrease.setOnClickListener(v -> {
             if (item.getQuantity() > 1) {
                 item.decreaseQuantity();
-                notifyItemChanged(position);
+                notifyItemChanged(position);  // Update the item in the RecyclerView
                 cartActivity.updateTotalAmount();  // Update the total amount in the activity
 
-                // Call API to remove item from cart
+                // Call API to update item quantity in cart
                 cartService.removeFromCart(item.getProductId(), cartActivity.getCartId(), new Callback<ResponseMessageDTO>() {
                     @Override
                     public void onResponse(Call<ResponseMessageDTO> call, Response<ResponseMessageDTO> response) {
@@ -93,6 +93,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
