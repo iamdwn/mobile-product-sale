@@ -29,6 +29,9 @@
             android:name=".BillingDetailsActivity"
             android:exported="false" />
         <activity
+            android:name=".ProductDetailActivity"
+            android:exported="false" />
+        <activity      
             android:name=".OrderConfirmationActivity"
             android:exported="false" />
         <activity
@@ -36,9 +39,6 @@
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -1,16 +1,16 @@
-package com.mobile.productsale;
+package com.mobile.productsale.model;
 
-public class Product {
+public class ProductDTO {
     private String productName;
     private String briefDescription;
     private String fullDescription;
     private String technicalSpecifications;
     private String category;
     private double price;
-    private String imageUrl; // Sử dụng String cho URL của hình ảnh
+    private String imageUrl;
 
     // Constructor
-    public Product(String productName, String briefDescription, String fullDescription, String technicalSpecifications, String category, double price, String imageUrl) {
+    public ProductDTO(String productName, String briefDescription, String fullDescription, String technicalSpecifications, String category, double price, String imageUrl) {
         this.productName = productName;
         this.briefDescription = briefDescription;
         this.fullDescription = fullDescription;
