@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA"
+    android:padding="16dp">
+
+
+    <TextView
+        android:id="@+id/successMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tickIcon"
+        android:layout_alignStart="@+id/tickIcon"
+        android:layout_marginStart="-63dp"
+        android:layout_marginTop="59dp"
+        android:text="Thanh toán thành công"
+        android:textColor="#4CAF50"
+        android:textSize="27sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/tickIcon"
+        android:layout_width="160dp"
+        android:layout_height="167dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_tick_green" />
+
+    <Button
+        android:id="@+id/buttonBackStore"
+        android:layout_width="346dp"
+        android:layout_height="72dp"
+        android:layout_below="@+id/successMessage"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:text="Trở lại cửa hàng"
+        android:textColor="#FFFFFF"
+        android:textSize="21dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
