@@ -42,7 +42,7 @@ public class NotiActivity extends AppCompatActivity {
 
         setContentView(R.layout.noti);
 
-        String json = "{\"notificationId\": 3, \"userId\": 9, \"message\": \"abc\", \"isRead\": false, \"createdAt\": \"2024-11-07T17:06:16.76\"}";
+        String json = "{\"notificationId\": 3, \"userId\": 9, \"message\": \"abc\", \"isRead\": false, \"createdAt\": \"2024-11-09T02:53:00\"}";
         try {
             Notification noti = gson.fromJson(json, Notification.class);
             listNoti = new ArrayList<>();

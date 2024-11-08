@@ -1,6 +1,7 @@
 package com.mobile.productsale;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +20,11 @@ import com.mobile.productsale.api.RequestUser;
 import com.mobile.productsale.model.BodyResponse;
 import com.mobile.productsale.model.Notification;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,8 +58,34 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
 
             holder.textView.setText(noti.getMessage());
 
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            holder.date.setText(noti.getCreatedAt());
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+
+            Date createdDate = null;
+            try {
+                createdDate = formatter.parse(noti.getCreatedAt());
+            } catch (ParseException e) {
+                Log.e("Loi dinh dang", e.getMessage());
+            }
+            Date currentDate = new Date();
+
+            long diffInMillis = currentDate.getTime() - createdDate.getTime();
+
+            long minutes = TimeUnit.MILLISECONDS.toMinutes(diffInMillis);
+            long hours = TimeUnit.MILLISECONDS.toHours(diffInMillis);
+            long days = TimeUnit.MILLISECONDS.toDays(diffInMillis);
+
+            String elapsedTime;
+            if (days > 0) {
+                elapsedTime = days + " days";
+            } else if (hours > 0) {
+                elapsedTime = hours + " hours";
+            } else if (minutes > 0) {
+                elapsedTime = minutes + " mins";
+            } else {
+                elapsedTime = "recently";
+            }
+
+            holder.date.setText(elapsedTime);
 
             holder.itemView.setOnClickListener(v -> {
 
