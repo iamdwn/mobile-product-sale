@@ -1,34 +1,64 @@
 package com.mobile.productsale;
 
 public class Product {
-    private String name;
-    private String description;
+    private String productName;
+    private String briefDescription;
+    private String fullDescription;
+    private String technicalSpecifications;
+    private String category;
     private double price;
-    private int imageResId;
+    private String imageUrl; // Sử dụng String cho URL của hình ảnh
 
     // Constructor
-    public Product(String name, String description, double price, int imageResId) {
-        this.name = name;
-        this.description = description;
+    public Product(String productName, String briefDescription, String fullDescription, String technicalSpecifications, String category, double price, String imageUrl) {
+        this.productName = productName;
+        this.briefDescription = briefDescription;
+        this.fullDescription = fullDescription;
+        this.technicalSpecifications = technicalSpecifications;
+        this.category = category;
         this.price = price;
-        this.imageResId = imageResId;
+        this.imageUrl = imageUrl;
     }
 
-    // Getters và Setters (tùy chọn nếu cần)
-    public String getName() {
-        return name;
+    // Getters và Setters
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getBriefDescription() {
+        return briefDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setBriefDescription(String briefDescription) {
+        this.briefDescription = briefDescription;
+    }
+
+    public String getFullDescription() {
+        return fullDescription;
+    }
+
+    public void setFullDescription(String fullDescription) {
+        this.fullDescription = fullDescription;
+    }
+
+    public String getTechnicalSpecifications() {
+        return technicalSpecifications;
+    }
+
+    public void setTechnicalSpecifications(String technicalSpecifications) {
+        this.technicalSpecifications = technicalSpecifications;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public double getPrice() {
@@ -39,11 +69,11 @@ public class Product {
         this.price = price;
     }
 
-    public int getImageResId() {
-        return imageResId;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImageResId(int imageResId) {
-        this.imageResId = imageResId;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

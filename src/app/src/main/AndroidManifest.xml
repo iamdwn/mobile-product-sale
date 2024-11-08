@@ -15,16 +15,13 @@
         android:theme="@style/Theme.ProductSale"
         tools:targetApi="31">
         <activity
-            android:name=".FilterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SortActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".ItemCardActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ProductDetailActivity"
             android:exported="false" />
         <activity
             android:name=".BillingDetailsActivity"
