@@ -1,6 +1,8 @@
 package com.mobile.productsale;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ public class CartActivity extends AppCompatActivity {
     private CartAdapter cartAdapter;
     private CartService cartService;
     private  int cartId;
+    private Button checkoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class CartActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewCartItems);
         textTotalAmount = findViewById(R.id.textTotalAmount);
+        checkoutButton = findViewById(R.id.buttonCheckout);
         cartService = new CartService();
 
         // Set up RecyclerView and Adapter
@@ -53,12 +57,20 @@ public class CartActivity extends AppCompatActivity {
 
         // Load cart items from the data source
         loadCartItems();
+
+        checkoutButton.setOnClickListener(view -> {
+            int orderId = 3;
+            Intent intent = new Intent(CartActivity.this, VietQRPaymentActivity.class);
+            intent.putExtra("orderId", orderId);
+            startActivity(intent);
+        });
     }
 
     // Xử lý sự kiện khi nhấn nút "Back" trên Toolbar
     @Override
     public boolean onSupportNavigateUp() {
-        finish(); // Kết thúc Activity để quay lại HomeActivity
+        Intent intent = new Intent(CartActivity.this, HomeActivity.class); // Kết thúc Activity để quay lại HomeActivity
+        startActivity(intent);
         return true;
     }
 
