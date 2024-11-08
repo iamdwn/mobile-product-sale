@@ -27,6 +27,7 @@
     <!-- Icon  -->
     <string name="notification_icon">Notification Icon</string>
     <string name="cart_icon">Cart Icon</string>
+    <string name="chat_icon">Chat Icon</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

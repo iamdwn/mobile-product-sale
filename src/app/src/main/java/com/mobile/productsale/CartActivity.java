@@ -5,6 +5,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +35,13 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart_activity);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Hiển thị nút "Back"
+            getSupportActionBar().setTitle("Your cart"); // Đặt tiêu đề header
+        }
+
         recyclerView = findViewById(R.id.recyclerViewCartItems);
         textTotalAmount = findViewById(R.id.textTotalAmount);
         cartService = new CartService();
@@ -45,6 +53,12 @@ public class CartActivity extends AppCompatActivity {
 
         // Load cart items from the data source
         loadCartItems();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish(); // Kết thúc Activity để quay lại HomeActivity
+        return true;
     }
 
     private void loadCartItems() {

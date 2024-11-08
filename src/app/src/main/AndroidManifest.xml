@@ -19,14 +19,12 @@
         <activity
             android:name=".ItemChatMessageActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".ChatRoomActivity"-->
-<!--            android:exported="false" />-->
         <activity
             android:name=".ItemCartActivity"
-            android:exported="false" /> <!-- <activity -->
-        <!-- android:name=".CartActivity" -->
-        <!-- android:exported="false" /> -->
+            android:exported="false" />
+        <activity
+            android:name=".CartActivity"
+            android:exported="false" />
         <activity
             android:name=".BillingDetailsActivity"
             android:exported="false" />
@@ -40,7 +38,7 @@
             android:name=".PaymentSuccessActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".ChatRoomActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
@@ -48,8 +46,8 @@
             android:label="@string/title_activity_register"
             android:theme="@style/Theme.ProductSale" />
         <activity
-            android:name=".ChatRoomActivity"
-            android:exported="true"/>
+            android:name=".HomeActivity"
+            android:exported="true">
         <activity
             android:name=".Home2Activity"
             android:exported="true" />
@@ -58,7 +56,6 @@
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
