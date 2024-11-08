@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <!-- Khai báo quyền truy cập Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AlzaSyJ-TujuvlBIoq23w5Gf1hpMTTz6k5NsZxV"/>
 
     <application
         android:allowBackup="true"
@@ -15,11 +17,14 @@
         android:theme="@style/Theme.ProductSale"
         tools:targetApi="31">
         <activity
-            android:name=".ItemCardActivity"
+            android:name=".MapsActivity"
             android:exported="false" />
         <activity
-            android:name=".BillingDetailsActivity"
+            android:name=".ItemCardActivity"
             android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".BillingDetailsActivity"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".OrderConfirmationActivity"
             android:exported="false" />

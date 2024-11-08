@@ -2,10 +2,12 @@ package com.mobile.productsale;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,17 +17,20 @@ import com.mobile.productsale.model.VietQrResponse;
 import com.mobile.productsale.services.PaymentService;
 import com.squareup.picasso.Picasso;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import android.os.Handler;
 import android.os.Looper;
 
+import java.util.concurrent.TimeUnit;
+
 public class VietQRPaymentActivity extends AppCompatActivity {
 
     private ImageView qrImageView;
     private WebView qrWebView;
-    private Button completePaymentButton;
+    private Button checkPaymentButton;
     private PaymentService paymentService;
     private int paymentId;
     private PayOSPaymentRequestDTO payOSPaymentRequestDTO;
@@ -42,11 +47,11 @@ public class VietQRPaymentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vietqr_payment);
-        payOSPaymentRequestDTO = new PayOSPaymentRequestDTO(12,"test oce chua?");
+        payOSPaymentRequestDTO = new PayOSPaymentRequestDTO(1,"test oce chua?");
 
         qrImageView = findViewById(R.id.qrImageView);
 //        qrWebView = findViewById(R.id.qrWebView);
-        completePaymentButton = findViewById(R.id.completePaymentButton);
+        checkPaymentButton = findViewById(R.id.checkPaymentButton);
 
         paymentService = new PaymentService();
         paymentId = getIntent().getIntExtra("PAYMENT_ID", 33);
@@ -62,7 +67,7 @@ public class VietQRPaymentActivity extends AppCompatActivity {
 
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(view -> finish());
-        completePaymentButton.setOnClickListener(view -> {
+        checkPaymentButton.setOnClickListener(view -> {
             completePayment(paymentId);
             Intent intent = new Intent(VietQRPaymentActivity.this, PaymentSuccessActivity.class);
             startActivity(intent);
@@ -115,7 +120,8 @@ public class VietQRPaymentActivity extends AppCompatActivity {
 //                    qrWebView.getSettings().setJavaScriptEnabled(true);
 //                    qrWebView.loadUrl(qrUrl);
                 } else {
-                    Toast.makeText(VietQRPaymentActivity.this, "Failed to load QR code", Toast.LENGTH_SHORT).show();
+                    String errorMessage = response.errorBody() != null ? response.errorBody().toString() : "Empty response";
+                    Toast.makeText(VietQRPaymentActivity.this, "Failed to load QR code: " + errorMessage, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -127,21 +133,26 @@ public class VietQRPaymentActivity extends AppCompatActivity {
     }
 
     private void fetchPayOS(PayOSPaymentRequestDTO payOSPaymentRequestDTO) {
+        ProgressBar loadingSpinner = findViewById(R.id.loadingSpinner);
+        loadingSpinner.setVisibility(View.VISIBLE);
         paymentService.createPayOSPayment(payOSPaymentRequestDTO, new Callback<VietQrResponse>() {
             @Override
             public void onResponse(Call<VietQrResponse> call, Response<VietQrResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     String qrUrl = response.body().getQrUrl();
                     Picasso.get().load(qrUrl).into(qrImageView);
+                    loadingSpinner.setVisibility(View.GONE);
 //                    WebView qrWebView = findViewById(R.id.qrWebView);
 //                    qrWebView.getSettings().setJavaScriptEnabled(true);
 //                    qrWebView.loadUrl(qrUrl);
                 } else {
-                    Toast.makeText(VietQRPaymentActivity.this, "Failed to load QR code", Toast.LENGTH_SHORT).show();
+                    String errorMessage = response.errorBody() != null ? response.errorBody().toString() : "Empty response";
+                    Toast.makeText(VietQRPaymentActivity.this, "Failed to load QR code: " + errorMessage, Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<VietQrResponse> call, Throwable t) {
+                loadingSpinner.setVisibility(View.GONE);
                 Toast.makeText(VietQRPaymentActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
