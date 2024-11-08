@@ -21,7 +21,7 @@ public class PaymentSuccessActivity extends AppCompatActivity {
         buttonBackStore = findViewById(R.id.buttonBackStore);
 
         buttonBackStore.setOnClickListener(view -> {
-            Intent intent = new Intent(PaymentSuccessActivity.this, Home.class);
+            Intent intent = new Intent(PaymentSuccessActivity.this, HomeActivity.class);
             startActivity(intent);
         });
     }

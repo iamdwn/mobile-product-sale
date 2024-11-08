@@ -15,6 +15,12 @@
         android:theme="@style/Theme.ProductSale"
         tools:targetApi="31">
         <activity
+            android:name=".ItemCartActivity"
+            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".CartActivity"-->
+<!--            android:exported="false" />-->
+        <activity
             android:name=".BillingDetailsActivity"
             android:exported="false" />
         <activity
@@ -27,15 +33,15 @@
             android:name=".VietQRPaymentActivity"
             android:exported="false" />
         <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="true"
             android:label="@string/title_activity_register"
             android:theme="@style/Theme.ProductSale" />
         <activity
-            android:name=".HomeActivity"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".CartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
