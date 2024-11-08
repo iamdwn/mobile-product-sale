@@ -28,6 +28,7 @@
     <string name="notification_icon">Notification Icon</string>
     <string name="logout_icon">Logout Icon</string>
     <string name="cart_icon">Cart Icon</string>
+    <string name="chat_icon">Chat Icon</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
@@ -66,4 +67,10 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="title_activity_register">Register</string>
+
+    <!-- Add the description for the refresh button -->
+    <string name="refresh_map">Refresh Map</string>
+
+    <!-- Additional strings for your app -->
+    <string name="ProductSale">ProductSale</string>
 </resources>

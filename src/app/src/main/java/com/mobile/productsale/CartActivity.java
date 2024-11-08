@@ -5,6 +5,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +35,13 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart_activity);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Hiển thị nút "Back"
+            getSupportActionBar().setTitle("Your cart"); // Đặt tiêu đề header
+        }
+
         recyclerView = findViewById(R.id.recyclerViewCartItems);
         textTotalAmount = findViewById(R.id.textTotalAmount);
         cartService = new CartService();
@@ -47,8 +55,15 @@ public class CartActivity extends AppCompatActivity {
         loadCartItems();
     }
 
+    // Xử lý sự kiện khi nhấn nút "Back" trên Toolbar
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish(); // Kết thúc Activity để quay lại HomeActivity
+        return true;
+    }
+
     private void loadCartItems() {
-        cartService.getCartByUser(9, new Callback<CartDTO>() {
+        cartService.getCartByUser(1, new Callback<CartDTO>() {
             @Override
             public void onResponse(Call<CartDTO> call, Response<CartDTO> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -67,10 +82,12 @@ public class CartActivity extends AppCompatActivity {
                     }
 
                     // Notify the adapter of data changes
-                    cartAdapter.notifyDataSetChanged();
+                    cartAdapter.notifyDataSetChanged(); // This will update the RecyclerView
 
                     // Update the total amount with the newly loaded items
                     updateTotalAmount();
+                } else {
+                    Toast.makeText(CartActivity.this, "Không thể tải giỏ hàng", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -80,6 +97,7 @@ public class CartActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public void updateTotalAmount() {
         double totalAmount = 0;

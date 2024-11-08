@@ -34,5 +34,9 @@ public interface RequestPayment {
     @POST("api/payment/complete-payment/{paymentId}")
     Call<Void> completePayment(@Path("paymentId") int paymentId);
 
+    @GET("/api/Payment/check-status-payos/{orderId}")
+    Call<String> checkStatusPayOS(@Path("orderId") int orderId);
 
+    @GET("/api/Payment/get-paymentId/{orderId}")
+    Call<Integer> getPaymentIdByOrderId(@Path("orderId") int orderId);
 }

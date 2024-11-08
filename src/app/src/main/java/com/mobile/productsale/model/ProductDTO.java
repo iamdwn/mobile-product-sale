@@ -1,6 +1,7 @@
 package com.mobile.productsale.model;
 
 public class ProductDTO {
+    private int productId;
     private String productName;
     private String briefDescription;
     private String fullDescription;
@@ -8,9 +9,11 @@ public class ProductDTO {
     private String category;
     private double price;
     private String imageUrl;
+    private int categoryId;
 
     // Constructor
-    public ProductDTO(String productName, String briefDescription, String fullDescription, String technicalSpecifications, String category, double price, String imageUrl) {
+    public ProductDTO(int productId, String productName, String briefDescription, String fullDescription, String technicalSpecifications, String category, double price, String imageUrl, int categoryId) {
+        this.productId = productId;
         this.productName = productName;
         this.briefDescription = briefDescription;
         this.fullDescription = fullDescription;
@@ -18,6 +21,7 @@ public class ProductDTO {
         this.category = category;
         this.price = price;
         this.imageUrl = imageUrl;
+        this.categoryId = categoryId;
     }
 
     // Getters và Setters
@@ -75,5 +79,21 @@ public class ProductDTO {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 }

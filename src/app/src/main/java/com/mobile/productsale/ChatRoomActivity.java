@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -59,6 +60,18 @@ public class ChatRoomActivity extends AppCompatActivity {
                 sendMessage();
             }
         });
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Hiển thị nút "Back"
+            getSupportActionBar().setTitle("Chat"); // Đặt tiêu đề header
+        }
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish(); // Kết thúc Activity để quay lại HomeActivity
+        return true;
     }
 
     private void fetchMessages() {
