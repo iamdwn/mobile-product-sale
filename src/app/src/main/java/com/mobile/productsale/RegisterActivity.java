@@ -93,24 +93,49 @@ public class RegisterActivity extends AppCompatActivity {
                             address.getText().toString()
                     );
 
-                    requestUser.registration(registerDTO).enqueue(new Callback<BodyResponse>() {
-                        @Override
-                        public void onResponse(@NonNull Call<BodyResponse> call, @NonNull Response<BodyResponse> response) {
-                            if (response.body() != null) {
-                                Toast.makeText(RegisterActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                    //Kiểm tra xem email đã tồn tại hay chưa
+                    requestUser.getUser(1,email.getText().toString().trim())
+                            .enqueue(new Callback<BodyResponse>() {
 
-                                //Register xong về trang login
-                                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                                intent.putExtra("userName", username.getText().toString());
-                                startActivity(intent);
-                            }
-                        }
+                                @Override
+                                public void onResponse( Call<BodyResponse> call,
+                                                        Response<BodyResponse> response) {
+                                    if (response.body() != null) {
+                                        if (response.body().getContent() != null){
+                                            username.setError("Email is already existed");
+                                            username.requestFocus();
 
-                        @Override
-                        public void onFailure(@NonNull Call<BodyResponse> call, @NonNull Throwable t) {
-                            Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    });
+                                        } else if (response.body().getContent() == null){
+
+                                            requestUser.registration(registerDTO).enqueue(new Callback<BodyResponse>() {
+                                                @Override
+                                                public void onResponse(@NonNull Call<BodyResponse> call, @NonNull Response<BodyResponse> response) {
+                                                    if (response.body() != null) {
+                                                        Toast.makeText(RegisterActivity.this, response.body().getMessage(), Toast.LENGTH_LONG).show();
+
+                                                        //Register xong về trang login
+                                                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                                                        intent.putExtra("userName", username.getText().toString());
+                                                        startActivity(intent);
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onFailure(@NonNull Call<BodyResponse> call, @NonNull Throwable t) {
+                                                    Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                                                }
+                                            });
+                                        }
+                                    } else {
+                                        Toast.makeText(RegisterActivity.this,"Server error. Please contact admin", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure( Call<BodyResponse> call,  Throwable t) {
+                                    Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
 
                 }
             } else if (registerSwitcher.getDisplayedChild() == 0 &&
@@ -120,22 +145,25 @@ public class RegisterActivity extends AppCompatActivity {
                 //Kiểm tra xem username đã tồn tại chưa
                 requestUser.getUser(0,username.getText().toString().trim())
                         .enqueue(new Callback<BodyResponse>() {
+
                     @Override
-                    public void onResponse(@NonNull Call<BodyResponse> call,
-                                           @NonNull Response<BodyResponse> response) {
+                    public void onResponse( Call<BodyResponse> call,
+                                            Response<BodyResponse> response) {
                         if (response.body() != null) {
-                            if (response.body().getStatusCode() != 200){
-                                username.setError(response.body().getMessage());
+                            if (response.body().getContent() != null){
+                                username.setError("Username is already existed");
                                 username.requestFocus();
-                            } else if (response.body().getStatusCode() == 200){
+
+                            } else if (response.body().getContent() == null){
                                 registerSwitcher.showNext();
                             }
-                            Toast.makeText(RegisterActivity.this,response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(RegisterActivity.this,"Server error. Please contact admin", Toast.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<BodyResponse> call, @NonNull Throwable t) {
+                    public void onFailure( Call<BodyResponse> call,  Throwable t) {
                         Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
