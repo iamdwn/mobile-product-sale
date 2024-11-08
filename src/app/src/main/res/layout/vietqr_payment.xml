@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA"
+    android:padding="16dp">
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-2dp"
+        android:layout_marginTop="5dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:backgroundTint="#E0E0E0"
+        android:padding="8dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_back_arrow" />
+
+    <TextView
+        android:id="@+id/qrTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quét mã QR để hoàn tất thanh toán"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:textColor="#333" />
+
+    <ImageView
+        android:id="@+id/qrImageView"
+        android:layout_width="600dp"
+        android:layout_height="600dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/qrTitle"
+        android:layout_marginTop="16dp"
+        android:contentDescription="QR Code" />
+
+    <Button
+        android:id="@+id/completePaymentButton"
+        android:layout_width="346dp"
+        android:layout_height="72dp"
+        android:layout_below="@id/qrImageView"
+        android:layout_alignStart="@+id/qrImageView"
+        android:layout_alignEnd="@+id/qrImageView"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="98dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:text="Hoàn tất Thanh toán"
+        android:textColor="#FFFFFF"
+        android:textSize="21dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
