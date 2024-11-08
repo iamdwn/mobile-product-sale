@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobile.productsale.model.CartItem;
+import com.mobile.productsale.model.ResponseMessageDTO;
 import com.mobile.productsale.services.CartService;
 
 import java.util.List;
@@ -50,18 +51,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             cartActivity.updateTotalAmount();  // Update the total amount in the activity
 
             // Call API to add item to cart
-            cartService.addToCart(item.getProductId(), cartActivity.getCartId(), new Callback<String>() {
+            cartService.addToCart(item.getProductId(), cartActivity.getCartId(), new Callback<ResponseMessageDTO>() {
                 @Override
-                public void onResponse(Call<String> call, Response<String> response) {
+                public void onResponse(Call<ResponseMessageDTO> call, Response<ResponseMessageDTO> response) {
                     if (response.isSuccessful() && response.body() != null) {
-                        Toast.makeText(cartActivity, response.body(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(cartActivity, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(cartActivity, "Failed to add to cart", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
-                public void onFailure(Call<String> call, Throwable t) {
+                public void onFailure(Call<ResponseMessageDTO> call, Throwable t) {
                     Toast.makeText(cartActivity, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
@@ -74,18 +75,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 cartActivity.updateTotalAmount();  // Update the total amount in the activity
 
                 // Call API to remove item from cart
-                cartService.removeFromCart(item.getProductId(), cartActivity.getCartId(), new Callback<String>() {
+                cartService.removeFromCart(item.getProductId(), cartActivity.getCartId(), new Callback<ResponseMessageDTO>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
+                    public void onResponse(Call<ResponseMessageDTO> call, Response<ResponseMessageDTO> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            Toast.makeText(cartActivity, response.body(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(cartActivity, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(cartActivity, "Failed to remove from cart", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                    public void onFailure(Call<ResponseMessageDTO> call, Throwable t) {
                         Toast.makeText(cartActivity, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });

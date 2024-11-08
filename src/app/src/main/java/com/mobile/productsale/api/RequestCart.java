@@ -1,6 +1,7 @@
 package com.mobile.productsale.api;
 
 import com.mobile.productsale.model.CartDTO;
+import com.mobile.productsale.model.ResponseMessageDTO;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -18,8 +19,8 @@ public interface RequestCart {
     Call<CartDTO> getCartByUser(@Path("userId") int userId);
 
     @POST("api/cart/addToCart")
-    Call<String> addToCart(@Query("productId") int productId, @Query("cartId") int cartId);
+    Call<ResponseMessageDTO> addToCart(@Query("productId") int productId, @Query("cartId") int cartId);
 
     @DELETE("api/cart/removeFromCart")
-    Call<String> removeFromCart(@Query("productId") int productId, @Query("cartId") int cartId);
+    Call<ResponseMessageDTO> removeFromCart(@Query("productId") int productId, @Query("cartId") int cartId);
 }

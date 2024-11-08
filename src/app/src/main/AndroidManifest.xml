@@ -15,11 +15,16 @@
         android:theme="@style/Theme.ProductSale"
         tools:targetApi="31">
         <activity
-            android:name=".ItemCartActivity"
+            android:name=".ItemChatMessageActivity"
             android:exported="false" />
 <!--        <activity-->
-<!--            android:name=".CartActivity"-->
+<!--            android:name=".ChatRoomActivity"-->
 <!--            android:exported="false" />-->
+        <activity
+            android:name=".ItemCartActivity"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".CartActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".BillingDetailsActivity"
             android:exported="false" />
@@ -41,7 +46,7 @@
             android:label="@string/title_activity_register"
             android:theme="@style/Theme.ProductSale" />
         <activity
-            android:name=".CartActivity"
+            android:name=".ChatRoomActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

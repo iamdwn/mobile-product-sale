@@ -5,6 +5,7 @@ import com.mobile.productsale.api.RequestPayment;
 import com.mobile.productsale.model.CartDTO;
 import com.mobile.productsale.model.Payment;
 import com.mobile.productsale.model.PaymentDTO;
+import com.mobile.productsale.model.ResponseMessageDTO;
 import com.mobile.productsale.model.VietQrResponse;
 import com.mobile.productsale.network.ApiClient;
 
@@ -28,13 +29,13 @@ public class CartService {
         call.enqueue(callback);
     }
 
-    public void addToCart(int productId, int cartId, Callback<String> callback) {
-        Call<String> call = cartApi.addToCart(productId, cartId);
+    public void addToCart(int productId, int cartId, Callback<ResponseMessageDTO> callback) {
+        Call<ResponseMessageDTO> call = cartApi.addToCart(productId, cartId);
         call.enqueue(callback);
     }
 
-    public void removeFromCart(int productId, int cartId, Callback<String> callback) {
-        Call<String> call = cartApi.removeFromCart(productId, cartId);
+    public void removeFromCart(int productId, int cartId, Callback<ResponseMessageDTO> callback) {
+        Call<ResponseMessageDTO> call = cartApi.removeFromCart(productId, cartId);
         call.enqueue(callback);
     }
 }
