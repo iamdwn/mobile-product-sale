@@ -1,11 +1,6 @@
 package com.mobile.productsale;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -106,31 +101,31 @@ public class MainActivity extends AppCompatActivity {
                                                                 accountInfo = gson.fromJson(response.body().getContent().toString(), Account.class);
 
                                                                 //Tạo thông báo nhập cập nhật thông tin
-                                                                if (accountInfo.getAddress().equals("default") || accountInfo.getPhoneNumber().equals("0352222222")) {
-                                                                    requestNoti.newNoti(new NewNotification(accountInfo.getUserId(), "[Information] Please update your personal information"));
-                                                                    Log.i("Da goi api", "da goi api");
+                                                                requestNoti.newNoti(new NewNotification(accountInfo.getUserId(), "[Information] Welcome back")).enqueue(new Callback<BodyResponse>() {
+                                                                    @Override
+                                                                    public void onResponse(Call<BodyResponse> call, Response<BodyResponse> response) {
 
-//                                                                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.meohaha);
-//
-//                                                                    Notification noti = new Notification.Builder(MainActivity.this)
-//                                                                            .setContentTitle("[Information] update your information")
-//                                                                            .setContentText("Please update your personal information")
-//                                                                            .setLargeIcon(bitmap)
-//                                                                            .build();
-//
-//                                                                    NotificationManager notificationManager =
-//                                                                            (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-//                                                                    notificationManager.notify(1, noti);
+                                                                        if (response.body().getStatusCode() != 200) {
+                                                                            Toast.makeText(MainActivity.this, "Message: " + response.body().getMessage() + " Status: " + response.body().getStatusCode(), Toast.LENGTH_LONG).show();
 
-                                                                }
+                                                                        }
+                                                                    }
 
-                                                                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                                                                intent.putExtra("accountInfo", accountInfo);
-                                                                startActivity(intent);
+                                                                    @Override
+                                                                    public void onFailure(Call<BodyResponse> call, Throwable t) {
+                                                                        Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                                                                    }
+                                                                });
+                                                                Log.i("Da goi api", "da goi api");
 
-                                                            } else if (response.body().getContent() == null) {
-                                                                Toast.makeText(MainActivity.this, "Server error. Get user information fails, please contact admin", Toast.LENGTH_LONG).show();
                                                             }
+
+                                                            Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                                            intent.putExtra("accountInfo", accountInfo);
+                                                            startActivity(intent);
+
+                                                        } else if (response.body().getContent() == null) {
+                                                            Toast.makeText(MainActivity.this, "Server error. Get user information fails, please contact admin", Toast.LENGTH_LONG).show();
                                                         }
                                                     }
 
