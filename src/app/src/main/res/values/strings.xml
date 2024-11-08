@@ -66,4 +66,10 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="title_activity_register">Register</string>
+
+    <!-- Add the description for the refresh button -->
+    <string name="refresh_map">Refresh Map</string>
+
+    <!-- Additional strings for your app -->
+    <string name="ProductSale">ProductSale</string>
 </resources>

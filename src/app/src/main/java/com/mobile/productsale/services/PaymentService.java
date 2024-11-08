@@ -43,4 +43,16 @@ public class PaymentService {
         Call<PaymentStatusResponse> call = paymentApi.getPaymentStatus(paymentId);
         call.enqueue(callback);
     }
+
+    public Call<String> checkStatusPayOS(int orderId, Callback<String> callback) {
+        Call<String> call = paymentApi.checkStatusPayOS(orderId);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Integer> getPaymentIdByOrderId(int orderId, Callback<Integer> callback) {
+        Call<Integer> call = paymentApi.getPaymentIdByOrderId(orderId);
+        call.enqueue(callback);
+        return call;
+    }
 }
