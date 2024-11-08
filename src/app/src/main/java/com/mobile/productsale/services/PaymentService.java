@@ -1,8 +1,7 @@
 package com.mobile.productsale.services;
 
 import com.mobile.productsale.api.RequestPayment;
-import com.mobile.productsale.model.Payment;
-import com.mobile.productsale.model.PaymentDTO;
+import com.mobile.productsale.model.PayOSPaymentRequestDTO;
 import com.mobile.productsale.model.PaymentStatusResponse;
 import com.mobile.productsale.model.VietQrResponse;
 import com.mobile.productsale.network.ApiClient;
@@ -17,9 +16,16 @@ public class PaymentService {
         paymentApi = ApiClient.getRetrofitInstance().create(RequestPayment.class);
     }
 
-    public void createPayment(PaymentDTO paymentDTO, Callback<Payment> callback) {
-        Call<Payment> call = paymentApi.createPayment(paymentDTO);
+    public Call<VietQrResponse> createPayOSPayment(PayOSPaymentRequestDTO payOSPaymentRequestDTO, Callback<VietQrResponse> callback) {
+        Call<VietQrResponse> call = paymentApi.createPayOSPayment(payOSPaymentRequestDTO);
         call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Object> cancelPayOSPayment(long orderCode, String reason, Callback<Object> callback) {
+        Call<Object> call = paymentApi.cancelPayOSPayment(orderCode, reason);
+        call.enqueue(callback);
+        return call;
     }
 
     public Call<VietQrResponse> getVietQR(int paymentId, Callback<VietQrResponse> callback) {
@@ -36,5 +42,17 @@ public class PaymentService {
     public void getPaymentStatus(int paymentId, Callback<PaymentStatusResponse> callback) {
         Call<PaymentStatusResponse> call = paymentApi.getPaymentStatus(paymentId);
         call.enqueue(callback);
+    }
+
+    public Call<String> checkStatusPayOS(int orderId, Callback<String> callback) {
+        Call<String> call = paymentApi.checkStatusPayOS(orderId);
+        call.enqueue(callback);
+        return call;
+    }
+
+    public Call<Integer> getPaymentIdByOrderId(int orderId, Callback<Integer> callback) {
+        Call<Integer> call = paymentApi.getPaymentIdByOrderId(orderId);
+        call.enqueue(callback);
+        return call;
     }
 }

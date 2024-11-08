@@ -5,17 +5,17 @@ public class RegisterDTO {
     private String userName;
     private String passwordHash;
     private String email;
-    private String phone;
+    private String phoneNumber;
     private String address;
 
     public RegisterDTO() {
     }
 
-    public RegisterDTO(String userName, String passwordHash, String email, String phone, String address) {
+    public RegisterDTO(String userName, String passwordHash, String email, String phoneNumber, String address) {
         this.userName = userName;
         this.passwordHash = passwordHash;
         this.email = email;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
         this.address = address;
     }
 
@@ -31,8 +31,8 @@ public class RegisterDTO {
         return email;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public String getAddress() {
@@ -51,8 +51,8 @@ public class RegisterDTO {
         this.email = email;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public void setAddress(String address) {

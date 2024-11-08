@@ -2,11 +2,32 @@
     <string name="app_name">ProductSale</string>
     <string name="username">Username</string>
     <string name="password">password</string>
+    <string name="home">Home</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <!-- Filter  -->
+    <string name="filter">Filter</string>
+    <string name="brand">Brand</string>
+    <string name="price_range">Price Range</string>
+    <string name="ratings">Ratings</string>
+    <!-- Sort  -->
+    <string name="sort">Sort</string>
+    <string name="price">Price</string>
+    <string name="popularity">Popularity</string>
+    <string name="category">Category</string>
+    <string name="product_name">Product Name</string>
+    <string name="brief_description">Brief description of the product.</string>
+    <string name="full_description">Full description of the product.</string>
+    <string name="technical_specifications">Technical Specifications: \n- Feature 1: Value\n- Feature 2: Value</string>
+    <string name="add_to_cart">Add to cart</string>
+
+    <!-- Icon  -->
+    <string name="notification_icon">Notification Icon</string>
+    <string name="cart_icon">Cart Icon</string>
+    <string name="chat_icon">Chat Icon</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
@@ -45,4 +66,10 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="title_activity_register">Register</string>
+
+    <!-- Add the description for the refresh button -->
+    <string name="refresh_map">Refresh Map</string>
+
+    <!-- Additional strings for your app -->
+    <string name="ProductSale">ProductSale</string>
 </resources>

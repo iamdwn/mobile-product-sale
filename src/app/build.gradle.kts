@@ -51,7 +51,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -66,6 +65,11 @@ dependencies {
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
     implementation(libs.support.annotations)
+    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("com.google.android.material:material:1.12.0")
+    implementation("androidx.activity:activity:1.9.2")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -77,5 +81,8 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation ("com.squareup.picasso:picasso:2.71828")
-
+    implementation ("org.jsoup:jsoup:1.13.1")
+    implementation ("com.google.android.gms:play-services-maps:18.0.2")
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    implementation ("com.google.android.material:material:1.4.0")
 }
