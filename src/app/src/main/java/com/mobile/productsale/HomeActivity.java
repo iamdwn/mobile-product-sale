@@ -1,68 +1,118 @@
 package com.mobile.productsale;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
-import androidx.activity.EdgeToEdge;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.mobile.productsale.model.ProductDTO;
+import com.mobile.productsale.services.ProductService;
+
 import java.util.ArrayList;
 import java.util.List;
-import android.content.Intent;
-import android.widget.TextView;
-import androidx.annotation.Nullable;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
+
+    private ProductService productService;
+    private ProductAdapter adapter;
+    private List<ProductDTO> productList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.home_activity);
 
-        // Set padding để hỗ trợ Edge to Edge
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        // Lấy tham chiếu tới nút Sort và Filter
         Button sortButton = findViewById(R.id.sortButton);
         Button filterButton = findViewById(R.id.filterButton);
 
-        // Sự kiện nhấn nút Sort
         sortButton.setOnClickListener(view -> showPopup(R.layout.sort, sortButton));
-
-        // Sự kiện nhấn nút Filter
         filterButton.setOnClickListener(view -> showPopup(R.layout.filter, filterButton));
 
-        // Khởi tạo danh sách sản phẩm
-        List<Product> productList = new ArrayList<>();
-        productList.add(new Product("Product 1", "Description 1", 100.0, R.drawable.ava3));
-        productList.add(new Product("Product 2", "Description 2", 200.0, R.drawable.ava3));
-        productList.add(new Product("Product 3", "Description 3", 300.0, R.drawable.ava3));
+        // Khởi tạo danh sách và adapter
+        productList = new ArrayList<>();
+        adapter = new ProductAdapter(productList, this::openProductDetail);
 
-        // Khởi tạo RecyclerView và gắn Adapter
+        // Cấu hình RecyclerView
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this)); // Đặt LayoutManager cho RecyclerView
-        ProductAdapter adapter = new ProductAdapter(productList); // Tạo adapter và truyền danh sách sản phẩm vào
-        recyclerView.setAdapter(adapter); // Gắn adapter vào RecyclerView
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
+        // Khởi tạo ProductService và gọi API
+        productService = new ProductService();
+        fetchProducts();
+
+        // Click vào icon cart
+        ImageView cartIcon = findViewById(R.id.cartIcon);
+        cartIcon.setOnClickListener(v -> navigateToCart());
+
+        // Click vào icon chat
+        ImageView chatIcon = findViewById(R.id.chatIcon);
+        chatIcon.setOnClickListener(v -> navigateToChat());
+
     }
 
-    // Phương thức hiển thị PopupWindow cho Sort và Filter
-    private void showPopup(int layoutResId, View anchorView) {
-        // Inflate layout cho popup từ layout XML
-        View popupView = LayoutInflater.from(this).inflate(layoutResId, null);
+    private void navigateToCart() {
+        Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+        startActivity(intent);
+    }
 
-        // Tạo PopupWindow
+    private void navigateToChat() {
+        Intent intent = new Intent(HomeActivity.this, ChatRoomActivity.class);
+        startActivity(intent);
+    }
+
+    private void fetchProducts() {
+        productService.getProduct(new Callback<List<ProductDTO>>() {
+            @Override
+            public void onResponse(Call<List<ProductDTO>> call, Response<List<ProductDTO>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<ProductDTO> products = response.body();
+                    Log.d("HomeActivity", "Products: " + products.toString());
+                    // Kiểm tra giá trị của imageUrl
+                    for (ProductDTO product : products) {
+                        Log.d("HomeActivity", "Product Image URL: " + product.getImageUrl());
+                    }
+                    // Cập nhật danh sách sản phẩm và thông báo adapter
+                    productList.clear();
+                    productList.addAll(response.body());
+                    adapter.notifyDataSetChanged();
+                } else {
+                    Log.e("HomeActivity", "Failed to fetch products. Response code: " + response.code());
+                    Toast.makeText(HomeActivity.this, "Failed to fetch products", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductDTO>> call, Throwable t) {
+                Toast.makeText(HomeActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void showPopup(int layoutResId, View anchorView) {
+        View popupView = LayoutInflater.from(this).inflate(layoutResId, null);
         PopupWindow popupWindow = new PopupWindow(
                 popupView,
                 androidx.appcompat.widget.LinearLayoutCompat.LayoutParams.WRAP_CONTENT,
@@ -70,23 +120,20 @@ public class HomeActivity extends AppCompatActivity {
                 true
         );
 
-        // Cải tiến: Thêm padding hoặc margin nếu cần
         popupWindow.setFocusable(true);
-        popupWindow.setOutsideTouchable(true); // Cho phép tắt popup khi nhấn ra ngoài
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.showAsDropDown(anchorView, 0, 10);
+    }
 
-        // Hiển thị PopupWindow ngay bên dưới nút được nhấn
-        popupWindow.showAsDropDown(anchorView, 0, 10); // Điều chỉnh margin (x: 0, y: 10)
-
-//     protected void onCreate(@Nullable Bundle savedInstanceState) {
-//         super.onCreate(savedInstanceState);
-
-//         setContentView(R.layout.home);
-
-//         TextView logout = findViewById(R.id.logout);
-
-//         logout.setOnClickListener(v -> {
-//             Intent backToLogin = new Intent(HomeActivity.this, MainActivity.class);
-//             startActivity(backToLogin);
-//         });
+    private void openProductDetail(ProductDTO product) {
+        Intent intent = new Intent(HomeActivity.this, ProductDetailActivity.class);
+        intent.putExtra("product_name", product.getProductName());
+        intent.putExtra("product_brief_description", product.getBriefDescription());
+        intent.putExtra("product_full_description", product.getFullDescription());
+        intent.putExtra("product_specs", product.getTechnicalSpecifications());
+        intent.putExtra("product_category", product.getCategory());
+        intent.putExtra("product_price", String.valueOf(product.getPrice()));
+        intent.putExtra("product_image_url", product.getImageUrl());
+        startActivity(intent);
     }
 }

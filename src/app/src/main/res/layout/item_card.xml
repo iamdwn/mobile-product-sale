@@ -43,7 +43,7 @@ android:padding="8dp">
     android:layout_height="wrap_content"
     android:textSize="16sp"
     android:textColor="#FF5722"
-    android:text="@string/product_price"
+    android:text="@string/price"
     android:layout_gravity="center"
     android:paddingTop="4dp" />
 
@@ -55,7 +55,7 @@ android:padding="8dp">
     android:ellipsize="end"
     android:maxLines="2"
     android:padding="8dp"
-    android:text="@string/product_description"
+    android:text="@string/full_description"
     android:textColor="#666666"
     android:textSize="14sp"
     android:layout_gravity="center"

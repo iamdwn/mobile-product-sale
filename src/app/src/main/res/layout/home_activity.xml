@@ -32,6 +32,21 @@
             android:textColor="#000000" />
 
         <!-- Icon thông báo ở bên phải -->
+
+        <ImageView
+            android:id="@+id/cartIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_cart"
+            android:contentDescription="@string/cart_icon"
+            android:layout_marginEnd="10dp" />
+        <ImageView
+            android:id="@+id/chatIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_chat"
+            android:contentDescription="@string/chat_icon"
+            android:layout_marginEnd="10dp" />
         <ImageView
             android:id="@+id/notificationIcon"
             android:layout_width="wrap_content"
@@ -39,6 +54,7 @@
             android:src="@drawable/ic_noti"
             android:contentDescription="@string/notification_icon"
             android:layout_marginEnd="8dp" />
+
     </LinearLayout>
 
     <!-- Container cho Sort và Filter Buttons -->
@@ -55,25 +71,25 @@
         app:layout_constraintTop_toBottomOf="@id/header">
 
         <!-- Nút Sort -->
-
-        <!-- Nút Filter -->
         <Button
             android:id="@+id/sortButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_border"
             android:text="@string/sort"
-            android:textColor="@color/white" />
+            android:background="@color/black"
+            android:textColor="@color/white"
+            android:elevation="10dp"/>
 
+        <!-- Nút Filter -->
         <Button
             android:id="@+id/filterButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/button_border"
-            android:text="@string/filter"
-            android:textColor="@color/white" />
+            android:background="@color/black"
+            android:textColor="@color/white"
+            android:text="@string/filter" />
     </LinearLayout>
 
     <!-- RecyclerView chứa danh sách các card -->

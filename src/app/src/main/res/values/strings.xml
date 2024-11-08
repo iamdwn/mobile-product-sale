@@ -18,14 +18,16 @@
     <string name="price">Price</string>
     <string name="popularity">Popularity</string>
     <string name="category">Category</string>
-
     <string name="product_name">Product Name</string>
-    <string name="product_price">Product Price</string>
-    <string name="product_description">Brief description of the product.</string>
+    <string name="brief_description">Brief description of the product.</string>
+    <string name="full_description">Full description of the product.</string>
+    <string name="technical_specifications">Technical Specifications: \n- Feature 1: Value\n- Feature 2: Value</string>
+    <string name="add_to_cart">Add to cart</string>
 
     <!-- Icon  -->
     <string name="notification_icon">Notification Icon</string>
-
+    <string name="cart_icon">Cart Icon</string>
+    <string name="chat_icon">Chat Icon</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

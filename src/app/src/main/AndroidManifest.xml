@@ -16,23 +16,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProductSale"
         tools:targetApi="31">
+        <activity android:name=".NotiActivity"
+            android:exported="true"/>
         <activity
             android:name=".MapsActivity"
             android:exported="false" />
         <activity
-            android:name=".ItemCardActivity"
+            android:name=".ItemChatMessageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ItemCartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CartActivity"
             android:exported="false" />
 <!--        <activity-->
 <!--            android:name=".BillingDetailsActivity"-->
 <!--            android:exported="false" />-->
         <activity
+            android:name=".ProductDetailActivity"
+            android:exported="false" />
+        <activity      
             android:name=".OrderConfirmationActivity"
             android:exported="false" />
         <activity
             android:name=".PaymentSuccessActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".ChatRoomActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
@@ -43,11 +54,13 @@
             android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".VietQRPaymentActivity"
-            android:exported="true">
+            android:name=".Home2Activity"
+            android:exported="true" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

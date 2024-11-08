@@ -83,6 +83,6 @@ dependencies {
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("org.jsoup:jsoup:1.13.1")
     implementation ("com.google.android.gms:play-services-maps:18.0.2")
-
-
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    implementation ("com.google.android.material:material:1.4.0")
 }
