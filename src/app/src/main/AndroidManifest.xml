@@ -15,6 +15,18 @@
         android:theme="@style/Theme.ProductSale"
         tools:targetApi="31">
         <activity
+            android:name=".FilterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SortActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ItemCardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".BillingDetailsActivity"
             android:exported="false" />
         <activity
@@ -31,6 +43,9 @@
             android:exported="true"
             android:label="@string/title_activity_register"
             android:theme="@style/Theme.ProductSale" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
