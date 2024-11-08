@@ -6,6 +6,7 @@ import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.mobile.productsale.R;
+import com.squareup.picasso.Picasso;
 
 public class PaymentActivity extends AppCompatActivity {
     private RadioGroup paymentMethodGroup;
