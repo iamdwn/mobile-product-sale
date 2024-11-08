@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -17,11 +18,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
 import com.mobile.productsale.Util.ApiConfig;
 import com.mobile.productsale.Util.IconLoader;
 import com.mobile.productsale.Util.Validate;
+import com.mobile.productsale.api.RequestNoti;
 import com.mobile.productsale.api.RequestUser;
+import com.mobile.productsale.model.Account;
 import com.mobile.productsale.model.BodyResponse;
+import com.mobile.productsale.model.NewNotification;
 import com.mobile.productsale.model.RegisterDTO;
 
 import org.w3c.dom.Text;
@@ -33,6 +38,9 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public class RegisterActivity extends AppCompatActivity {
+
+    private Gson gson = new Gson();
+    private Account account;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,13 +56,11 @@ public class RegisterActivity extends AppCompatActivity {
         IconLoader.loadImage(this, IconLoader.gg, gg);
 
 //      get animation
-        Animation toRight = AnimationUtils.loadAnimation(RegisterActivity.this, android.R.anim.slide_out_right);
         Animation toLeft = AnimationUtils.loadAnimation(RegisterActivity.this, android.R.anim.slide_in_left);
 
         ViewSwitcher registerSwitcher = findViewById(R.id.continueRegister);
         TextView previousPage = findViewById(R.id.backToLogin);
         TextView returnToLogin = findViewById(R.id.loginRedirect);
-        TextView inform = findViewById(R.id.informText);
         Button register = findViewById(R.id.registerBtn);
 
         EditText username = findViewById(R.id.usernameText);
@@ -94,18 +100,26 @@ public class RegisterActivity extends AppCompatActivity {
                     );
 
                     //Kiểm tra xem email đã tồn tại hay chưa
-                    requestUser.getUser(1,email.getText().toString().trim())
+                    requestUser.getUser(1, email.getText().toString().trim())
                             .enqueue(new Callback<BodyResponse>() {
 
                                 @Override
-                                public void onResponse( Call<BodyResponse> call,
-                                                        Response<BodyResponse> response) {
+                                public void onResponse(Call<BodyResponse> call,
+                                                       Response<BodyResponse> response) {
                                     if (response.body() != null) {
-                                        if (response.body().getContent() != null){
+                                        if (response.body().getContent() != null) {
                                             username.setError("Email is already existed");
                                             username.requestFocus();
 
-                                        } else if (response.body().getContent() == null){
+                                        } else if (response.body().getContent() == null) {
+
+                                            if (registerDTO.getPhoneNumber().toString().trim().isEmpty()){
+                                                registerDTO.setPhoneNumber("0352222222");
+                                            }
+
+                                            if (registerDTO.getAddress().toString().trim().isEmpty()) {
+                                                registerDTO.setAddress("default");
+                                            }
 
                                             requestUser.registration(registerDTO).enqueue(new Callback<BodyResponse>() {
                                                 @Override
@@ -115,7 +129,12 @@ public class RegisterActivity extends AppCompatActivity {
 
                                                         //Register xong về trang login
                                                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                                                        intent.putExtra("userName", username.getText().toString());
+
+                                                        if (intent.hasExtra("userName")){
+                                                            intent.removeExtra("userName");
+                                                        }
+
+                                                        intent.putExtra("userName", registerDTO.getUserName());
                                                         startActivity(intent);
                                                     }
                                                 }
@@ -127,12 +146,12 @@ public class RegisterActivity extends AppCompatActivity {
                                             });
                                         }
                                     } else {
-                                        Toast.makeText(RegisterActivity.this,"Server error. Please contact admin", Toast.LENGTH_LONG).show();
+                                        Toast.makeText(RegisterActivity.this, "Server error. Please contact admin", Toast.LENGTH_LONG).show();
                                     }
                                 }
 
                                 @Override
-                                public void onFailure( Call<BodyResponse> call,  Throwable t) {
+                                public void onFailure(Call<BodyResponse> call, Throwable t) {
                                     Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             });
@@ -143,30 +162,30 @@ public class RegisterActivity extends AppCompatActivity {
                     Validate.Field(password, "Please enter a password")) {
 
                 //Kiểm tra xem username đã tồn tại chưa
-                requestUser.getUser(0,username.getText().toString().trim())
+                requestUser.getUser(0, username.getText().toString().trim())
                         .enqueue(new Callback<BodyResponse>() {
 
-                    @Override
-                    public void onResponse( Call<BodyResponse> call,
-                                            Response<BodyResponse> response) {
-                        if (response.body() != null) {
-                            if (response.body().getContent() != null){
-                                username.setError("Username is already existed");
-                                username.requestFocus();
+                            @Override
+                            public void onResponse(Call<BodyResponse> call,
+                                                   Response<BodyResponse> response) {
+                                if (response.body() != null) {
+                                    if (response.body().getContent() != null) {
+                                        username.setError("Username is already existed");
+                                        username.requestFocus();
 
-                            } else if (response.body().getContent() == null){
-                                registerSwitcher.showNext();
+                                    } else if (response.body().getContent() == null) {
+                                        registerSwitcher.showNext();
+                                    }
+                                } else {
+                                    Toast.makeText(RegisterActivity.this, "Server error. Please contact admin", Toast.LENGTH_LONG).show();
+                                }
                             }
-                        } else {
-                            Toast.makeText(RegisterActivity.this,"Server error. Please contact admin", Toast.LENGTH_LONG).show();
-                        }
-                    }
 
-                    @Override
-                    public void onFailure( Call<BodyResponse> call,  Throwable t) {
-                        Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                            @Override
+                            public void onFailure(Call<BodyResponse> call, Throwable t) {
+                                Toast.makeText(RegisterActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
 
             }
         });
