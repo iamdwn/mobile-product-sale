@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".HomeActivity"
-    >
+    tools:context=".HomeActivity">
+
 
     <TextView
         android:id="@+id/logout"
@@ -26,6 +25,8 @@
 <!--        android:layout_height="1010dp"-->
 <!--        tools:layout_editor_absoluteX="1dp"-->
 <!--        tools:layout_editor_absoluteY="72dp">-->
+<!--        tools:layout_editor_absoluteY="72dp"-->
+<!--        tools:ignore="MissingConstraints">-->
 
 <!--        <View-->
 <!--            android:id="@+id/view"-->

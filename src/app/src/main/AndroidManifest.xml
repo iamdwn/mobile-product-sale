@@ -15,25 +15,33 @@
         android:theme="@style/Theme.ProductSale"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ItemChatMessageActivity"
             android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".ChatRoomActivity"-->
+<!--            android:exported="false" />-->
         <activity
-            android:name=".ItemCardActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ProductDetailActivity"
-            android:exported="false" />
+            android:name=".ItemCartActivity"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".CartActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".BillingDetailsActivity"
             android:exported="false" />
         <activity
+            android:name=".ProductDetailActivity"
+            android:exported="false" />
+        <activity      
             android:name=".OrderConfirmationActivity"
             android:exported="false" />
         <activity
             android:name=".PaymentSuccessActivity"
             android:exported="false" />
         <activity
-            android:name=".VietQRPaymentActivity"
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
@@ -41,10 +49,7 @@
             android:label="@string/title_activity_register"
             android:theme="@style/Theme.ProductSale" />
         <activity
-            android:name=".HomeActivity"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".ChatRoomActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
