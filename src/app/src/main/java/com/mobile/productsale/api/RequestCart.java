@@ -8,6 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -23,4 +24,7 @@ public interface RequestCart {
 
     @DELETE("api/cart/removeFromCart")
     Call<ResponseMessageDTO> removeFromCart(@Query("productId") int productId, @Query("cartId") int cartId);
+
+    @PUT("api/cart/clearCart")
+    Call<ResponseMessageDTO> clearCart(@Query("cartId") int cartId);
 }

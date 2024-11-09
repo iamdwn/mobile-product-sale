@@ -39,4 +39,8 @@ public class CartService {
         call.enqueue(callback);
     }
 
+    public  void clearCart(int cartId, Callback<ResponseMessageDTO> callback){
+        Call<ResponseMessageDTO> call = cartApi.clearCart(cartId);
+        call.enqueue(callback);
+    }
 }
