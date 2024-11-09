@@ -15,8 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 public class OrderActivity extends AppCompatActivity {
 
     private Spinner paymentMethodSpinner;
-    private EditText addressEditText,phoneEditText;
+    private EditText addressEditText,phoneEditText, noteEditText;
     private Button confirmButton, btnBack;
+    private int orderId = 3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,7 @@ public class OrderActivity extends AppCompatActivity {
         addressEditText = findViewById(R.id.addressEditText);
         phoneEditText = findViewById(R.id.phoneEditText);
         confirmButton = findViewById(R.id.confirmButton);
+        noteEditText = findViewById(R.id.noteEditText);
 
         // Set up Payment Methods Spinner
         ArrayAdapter<String> paymentMethodAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new String[]{"VietQR", "PayPal", "VNPay","ZaloPay"});
@@ -35,27 +37,27 @@ public class OrderActivity extends AppCompatActivity {
         paymentMethodSpinner.setAdapter(paymentMethodAdapter);
 
         // Set up Confirm button click listener
-        confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                confirmOrder();
-            }
+        confirmButton.setOnClickListener(view -> {
+            Intent intent = new Intent(OrderActivity.this, VietQRPaymentActivity.class);
+            intent.putExtra("orderId", orderId);
+            intent.putExtra("paymentNote", noteEditText.getText().toString());
+            startActivity(intent);
         });
 
         // Xử lý sự kiện khi nhấn nút quay lại
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Quay lại màn hình trước
-                onBackPressed();
-            }
-        });
+//        btnBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // Quay lại màn hình trước
+//                onBackPressed();
+//            }
+//        });
 
 
 
 
     }
-    Intent intent = new Intent(OrderActivity.this, VietQRPaymentActivity.class);
+//    Intent intent = new Intent(OrderActivity.this, VietQRPaymentActivity.class);
 
 
     private void confirmOrder() {

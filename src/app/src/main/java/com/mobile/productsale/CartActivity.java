@@ -60,7 +60,7 @@ public class CartActivity extends AppCompatActivity {
 
         checkoutButton.setOnClickListener(view -> {
             int orderId = 3;
-            Intent intent = new Intent(CartActivity.this, VietQRPaymentActivity.class);
+            Intent intent = new Intent(this, OrderActivity.class);
             intent.putExtra("orderId", orderId);
             startActivity(intent);
         });

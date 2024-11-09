@@ -36,9 +36,9 @@ public class VietQRPaymentActivity extends AppCompatActivity {
     private PayOSPaymentRequestDTO payOSPaymentRequestDTO;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private static final int POLLING_INTERVAL = 3000;
-    private int orderId;
+    private int currentOrderId;
     private int orderIdTest = 3;
-    private String paymentNote = "test oce chua?";
+    private String currentPaymentNote;
 
     public void setupPayment() {
         payOSPaymentRequestDTO = new PayOSPaymentRequestDTO(4,"");
@@ -50,8 +50,9 @@ public class VietQRPaymentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vietqr_payment);
-        orderId = getIntent().getIntExtra("orderId", -1);
-        payOSPaymentRequestDTO = new PayOSPaymentRequestDTO(orderId, "Chuyen khoan cho" + orderId);
+        currentOrderId = getIntent().getIntExtra("orderId", -1);
+        currentPaymentNote = getIntent().getStringExtra("paymentNote");
+        payOSPaymentRequestDTO = new PayOSPaymentRequestDTO(currentOrderId, currentPaymentNote);
 
         qrImageView = findViewById(R.id.qrImageView);
 //        qrWebView = findViewById(R.id.qrWebView);
