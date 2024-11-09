@@ -72,7 +72,7 @@ public class VietQRPaymentActivity extends AppCompatActivity {
 //        getPaymentIdByOrderId(payOSPaymentRequestDTO.getOrderId());
 
         ImageButton backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(view -> completePayment(paymentId));
+        backButton.setOnClickListener(view -> finish());
         checkPaymentButton.setOnClickListener(view -> {
 //            checkPayOSPaymentStatus(orderIdTest);
             completePayment(paymentId);
