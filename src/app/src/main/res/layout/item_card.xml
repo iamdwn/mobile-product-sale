@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,58 +8,59 @@
     app:cardBackgroundColor="#FFFFFF"
     app:contentPadding="16dp"
     android:layout_marginBottom="16dp">
-<LinearLayout
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:orientation="vertical"
-android:padding="8dp">
 
-<!-- ImageView hiển thị ảnh sản phẩm (hình vuông) -->
-<ImageView
-    android:id="@+id/item_image"
-    android:layout_width="120dp"
-    android:layout_height="120dp"
-    android:scaleType="centerCrop"
-    android:src="@drawable/ava3"
-    android:layout_gravity="center" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
 
-<!-- TextView hiển thị tên sản phẩm, được canh giữa bên dưới ảnh -->
-<TextView
-    android:id="@+id/item_name"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textSize="18sp"
-    android:textStyle="bold"
-    android:textColor="#000000"
-    android:text="@string/product_name"
-    android:layout_gravity="center"
-    android:paddingTop="8dp" />
+        <!-- ImageView hiển thị ảnh sản phẩm (hình vuông) -->
+        <ImageView
+            android:id="@+id/item_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ava3"
+            android:layout_gravity="center" />
 
-<!-- TextView hiển thị giá sản phẩm, canh giữa bên dưới tên sản phẩm -->
-<TextView
-    android:id="@+id/item_price"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textSize="16sp"
-    android:textColor="#FF5722"
-    android:text="@string/price"
-    android:layout_gravity="center"
-    android:paddingTop="4dp" />
+        <!-- TextView hiển thị tên sản phẩm, được canh giữa bên dưới ảnh -->
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:text="@string/product_name"
+            android:layout_gravity="center"
+            android:paddingTop="8dp" />
 
-<!-- TextView hiển thị mô tả ngắn, canh giữa bên dưới giá sản phẩm -->
-<TextView
-    android:id="@+id/item_description"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:ellipsize="end"
-    android:maxLines="2"
-    android:padding="8dp"
-    android:text="@string/full_description"
-    android:textColor="#666666"
-    android:textSize="14sp"
-    android:layout_gravity="center"
-    android:paddingTop="4dp" />
+        <!-- TextView hiển thị giá sản phẩm, canh giữa bên dưới tên sản phẩm -->
+        <TextView
+            android:id="@+id/item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="#FF5722"
+            android:text="@string/price"
+            android:layout_gravity="center"
+            android:paddingTop="4dp" />
 
-</LinearLayout>
+        <!-- TextView hiển thị mô tả ngắn, canh giữa bên dưới giá sản phẩm -->
+        <TextView
+            android:id="@+id/item_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:padding="8dp"
+            android:text="@string/full_description"
+            android:textColor="#666666"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:paddingTop="4dp" />
 
-    </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
