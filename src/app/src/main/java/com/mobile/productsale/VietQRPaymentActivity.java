@@ -52,6 +52,8 @@ public class VietQRPaymentActivity extends AppCompatActivity {
         setContentView(R.layout.vietqr_payment);
         currentOrderId = getIntent().getIntExtra("orderId", -1);
         currentPaymentNote = getIntent().getStringExtra("paymentNote");
+        if (currentPaymentNote.isEmpty() || currentPaymentNote.equalsIgnoreCase(""))
+            currentPaymentNote = "Chuyen tien";
         payOSPaymentRequestDTO = new PayOSPaymentRequestDTO(currentOrderId, currentPaymentNote);
 
         qrImageView = findViewById(R.id.qrImageView);
